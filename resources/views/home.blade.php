@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>APHT</title>
-    <link rel="shortcut icon" href="{{ asset('assets') }}/img/logo.png" >
+    <link rel="shortcut icon" href="{{ asset('assets') }}/img/logo.png">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -39,6 +39,7 @@
                             </svg>
                             <span class="sr-only">Toggle sidebar</span>
                         </button>
+
                         <a href="#" class="flex items-center justify-between mr-8 px-6">
                             <img src="{{ asset('assets') }}/img/icons.png" class="mr-3 h-8"
                                 alt="APHT Logo" />
@@ -48,6 +49,7 @@
                         <form action="#" method="GET" class="hidden md:block md:pl-2">
                             <label for="topbar-search" class="sr-only">Search</label>
                             <div class="relative w-64 md:w-96">
+
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -265,7 +267,9 @@
                             </svg>
                         </button>
                         <!-- Dropdown menu -->
+
                         <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+
                             id="apps-dropdown">
                             <div
                                 class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">

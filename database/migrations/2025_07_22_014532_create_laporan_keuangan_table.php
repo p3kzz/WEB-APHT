@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('LK_id')->constrained('users');
+            $table->foreignId('LK_id')->constrained('tenant');
             $table->enum('keterangan', ['Pemasukan', 'pengeluaran', 'labarugi']);
             $table->date('tanggal_produksi');
             $table->string('deskripsi');

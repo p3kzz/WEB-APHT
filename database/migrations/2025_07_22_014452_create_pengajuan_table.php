@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('file_pengajuan');
             $table->string('deskripsi');
             $table->enum('status', ['pending', 'ditolak', 'disetujui'])->default('pending');
-            $table->string('komentar');
+            $table->string('komentar')->nullable();
             $table->timestamps();
         });
     }

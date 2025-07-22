@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('tenant', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('tenant_id')->constrained('users');
+            $table->foreignId('tenant_id')->constrained('users');
             $table->string('name');
             $table->string('alamat');
-            $table->string('no_hp')->nullable();
-            $table->enum('status', ['pending', 'aktif', 'tidak_aktif'])->default('pending');
+            $table->string('no_hp');
+            $table->enum('status', ['aktif', 'tidak_aktif'])->default('aktif');
             $table->timestamps();
         });
     }

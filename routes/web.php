@@ -12,7 +12,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/dus', function () {
-    return view('tenan.dataUnitusaha');
+    return view('tenan.dataUnitUsaha');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

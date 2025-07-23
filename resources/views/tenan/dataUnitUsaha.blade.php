@@ -1,4 +1,5 @@
 @extends('layouts.tenant')
+@extends('home')
 
 @section('content')
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
@@ -28,7 +29,7 @@
                     <th class="py-2">No</th>
                     <th class="py-2">Nama Tenan</th>
                     <th class="py-2">Lokasi</th>
-                    <th class="py-2">Jenis Usaha</th>
+                    <th class="py-2">Kontak</th>
                     <th class="py-2">Status</th>
                     <th class="py-2">Aksi</th>
                 </tr>

@@ -13,8 +13,7 @@
     <div class="flex flex-col lg:flex-row">
         <aside class="w-full lg:w-64 bg-white shadow h-auto lg:h-screen p-4 flex flex-col justify-between">
             <div>
-                <div class="text-green-800 font-bold text-xl mb-2 lg:mb-6">APHT</div>
-                <div class="text-sm text-gray-600 mb-4 lg:mb-10">Perusahaan Daerah Sumenep</div>
+                <img src="{{ asset('assets/img/logoAPHT.png') }}" class="w-74 h-auto mb-12" alt="">
 
                 <nav class="space-y-2 lg:space-y-4">
                     <a href="#"

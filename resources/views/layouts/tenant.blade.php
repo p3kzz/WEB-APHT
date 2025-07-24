@@ -24,7 +24,7 @@
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/dashboard.png') }}" alt=""></div>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
+                    <a href="/DataUnitUsaha" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
                         <span>Data Unit Usaha</span>
                     </a>

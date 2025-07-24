@@ -18,6 +18,10 @@
         <button class="px-4 py-2 bg-gray-200 rounded-full">Verified</button>
         <button class="px-4 py-2 bg-gray-200 rounded-full">Not Verified</button>
         <button class="px-4 py-2 bg-gray-100 border rounded-full">Export PDF</button>
+        <a href="">
+            <button class="px-4 py-2 text-white bg-green-500 rounded-full">Tambah</button>
+        </a>
+       
     </div>
 
 
@@ -34,21 +38,33 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($tenants as $index => $tenant)
+                    <tr class="border-t">
+                        <td class="py-2">{{ $index + 1 }}.</td>
+                        <td class="py-2">{{ $tenant->name }}</td>
+                        <td class="py-2">{{ $tenant->alamat }}</td>
+                        <td class="py-2">{{ $tenant->no_hp }}</td>
+                        <td class="py-2 text-green-600 font-semibold">{{ ucfirst($tenant->status) }}</td>
+                        <td class="py-2">
+                            <div class="flex items-center gap-2">
+                                <a href=""
+                                class="px-3 py-1 bg-green-500 text-white text-xs rounded-full"
+                                onclick="return confirm('Yakin ingin memverifikasi tenant ini?');">
+                                    Verification
+                                </a>
 
-                <tr class="border-t">
-                    <td class="py-2">1.</td>
-                    <td class="py-2">Tembakau Kita</td>
-                    <td class="py-2">Batuan, Sumenep</td>
-                    <td class="py-2">+62 821 1696 5805</td>
-                    <td class="py-2 text-green-600 font-semibold">Aktif</td>
-                    <td class="py-2">
-                        <button class="px-3 py-1 bg-green-500
-                        text-white text-xs rounded-full">Verification</button>
-                    </td>
-                </tr>
+                                <a href="/hapus/{{ $tenant->id }}/tenant"
+                                class="px-3 py-1 bg-red-500 text-white text-xs rounded-full"
+                                onclick="return confirm('Yakin ingin menghapus?')">
+                                    Hapus
+                                </a>
+                            </div>
+                        </td>
 
-
+                    </tr>
+                @endforeach
             </tbody>
+
         </table>
     </div>
 @endsection

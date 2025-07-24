@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TenantControllers;
 
 Route::get('/', function () {
     return view('home');
@@ -15,9 +16,7 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/dus', function () {
-    return view('tenan.dataUnitUsaha');
-});
+Route::get('/DataUnitUsaha', [TenantControllers::class, 'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 

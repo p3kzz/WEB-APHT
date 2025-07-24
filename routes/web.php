@@ -11,11 +11,16 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 
+Route::get('/register', function () {
+    return view('auth.register');
+});
+
 Route::get('/dus', function () {
     return view('tenan.dataUnitUsaha');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

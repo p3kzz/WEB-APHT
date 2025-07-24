@@ -10,10 +10,13 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div class="flex flex-col lg:flex-row">
-        <aside class="w-full lg:w-64 bg-white shadow h-auto lg:h-screen p-4 flex flex-col justify-between">
+    <div class="flex flex-col lg:flex-row ">
+        <aside class="w-full lg:w-64 bg-white shadow h-auto lg:h-screen p-4 flex flex-col justify-between
+        lg:fixed lg:top-0 lg:left-0 lg:bottom-0 z-50">
             <div>
-                <img src="{{ asset('assets/img/logoAPHT.png') }}" class="w-74 h-auto mb-12" alt="">
+
+                <img src="{{ asset('assets/img/Group 44.png') }}"  class="mb-12 h-20" alt="">
+
 
                 <nav class="space-y-2 lg:space-y-4">
                     <a href="#"
@@ -21,7 +24,7 @@
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/dashboard.png') }}" alt=""></div>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-2 text-green-700 font-semibold">
+                    <a href="#" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
                         <span>Data Unit Usaha</span>
                     </a>
@@ -71,7 +74,7 @@
 
 
 
-        <main class="flex-1 p-4 lg:p-6">
+        <main class="flex-1 p-4 lg:p-6 lg:ml-64">
             @yield('content')
 
         </main>

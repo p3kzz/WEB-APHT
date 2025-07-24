@@ -30,17 +30,18 @@
     <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Login Your Account</h2>
 
     <!-- Form -->
-    <form>
+    <form method="POST" action="">
+        @csrf
       <!-- Username -->
       <div class="mb-4">
-        <label class="block text-sm text-gray-700 mb-1" for="username">Username</label>
-        <input id="username" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
+        <label class="block text-sm text-gray-700 mb-1" for="username">Email</label>
+        <input  name="email" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
       </div>
 
       <!-- Password with eye toggle -->
       <div class="mb-6 relative">
         <label class="block text-sm text-gray-700 mb-1" for="password">Password</label>
-        <input id="password" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
+        <input  type="password"  name="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
         <div class="absolute right-0 bottom-1 cursor-pointer p-2" onclick="togglePassword()">
           <i data-feather="eye" class="w-4 h-4" id="toggleIcon"></i>
         </div>

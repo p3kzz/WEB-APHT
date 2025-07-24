@@ -24,7 +24,7 @@
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/dashboard.png') }}" alt=""></div>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
+                    <a href="dus" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
                         <span>Data Unit Usaha</span>
                     </a>
@@ -48,7 +48,7 @@
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/monitoring-system.png') }}" alt=""></div>
                         <span>Data Monitoring</span>
                     </a>
-                    <a href="#"
+                    <a href="/dusi"
                         class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
                         <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/diagram.png') }}" alt=""></div>
                         <span>Data Keuangan</span>
@@ -65,7 +65,7 @@
                     <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/settings.png') }}" alt=""></div>
                     <span>Setting</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 text-red-600 font-bold">
+                <a href="/logout" class="flex items-center space-x-2 text-red-600 font-bold">
                     <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/logout.png') }}" alt=""></div>
                     <span>Logout</span>
                 </a>

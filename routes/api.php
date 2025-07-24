@@ -8,6 +8,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
 Route::prefix('v1')->group(function(){
     // hendle pengajuan
     Route::prefix('pengajuan')->group(function() {
@@ -15,6 +16,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/', [PengajuanApiController::class, 'store']);
         Route::get('/{id}', [PengajuanApiController::class, 'show']);
         Route::put('/{id}', [PengajuanApiController::class, 'update']);
-        Route::put('/{id}', [PengajuanApiController::class, 'destroy']);
+        Route::delete('/{id}', [PengajuanApiController::class, 'destroy']);
+
     });
 });

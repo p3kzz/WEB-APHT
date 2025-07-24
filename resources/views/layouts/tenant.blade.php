@@ -14,7 +14,9 @@
         <aside class="w-full lg:w-64 bg-white shadow h-auto lg:h-screen p-4 flex flex-col justify-between
         lg:fixed lg:top-0 lg:left-0 lg:bottom-0 z-50">
             <div>
+
                 <img src="{{ asset('assets/img/Group 44.png') }}"  class="mb-12 h-20" alt="">
+
 
                 <nav class="space-y-2 lg:space-y-4">
                     <a href="#"

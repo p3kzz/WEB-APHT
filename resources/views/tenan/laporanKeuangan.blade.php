@@ -26,10 +26,10 @@
             <thead class="border-b">
                 <tr class="text-left text-gray-600">
                     <th class="py-2">No</th>
-                    <th class="py-2">Nama Tenan</th>
-                    <th class="py-2">Lokasi</th>
-                    <th class="py-2">Kontak</th>
-                    <th class="py-2">Status</th>
+                    <th class="py-2">Keterangan</th>
+                    <th class="py-2">Tanggal Produksi</th>
+                    <th class="py-2">Deskripsi</th>
+                    <th class="py-2">File</th>
                     <th class="py-2">Aksi</th>
                 </tr>
             </thead>

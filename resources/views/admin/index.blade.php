@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.tenant')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
 
-<body>
-    <h1>halaman admin</h1>
-    <a href="{{ route('logout') }}">Logout</a>
-</body>
-
-</html>
+    <body>
+        <h1>halaman admin</h1>
+        <a href="{{ route('logout') }}">Logout</a>
+    </body>
+@endsection

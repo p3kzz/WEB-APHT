@@ -23,7 +23,7 @@ class PengajuanSeeder extends Seeder
         Storage::put('pengajuan/dummy.pdf', 'isi file dummy');
 
         Pengajuan::create([
-            'pengajuan_id' => $tenant->id,
+            'tenant_id' => $tenant->id,
             'tanggal_pengajuan' => now()->toDateString(),
             'unit_usaha' => 'Usaha Tani Cabe',
             'file_pengajuan' => 'pengajuan/dummy.pdf',

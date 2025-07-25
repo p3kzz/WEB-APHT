@@ -16,7 +16,7 @@ class TenantSeeder extends Seeder
     {
         $user = User::where('email', 'tenant@gmail.com')->first();
         TenantModel::create([
-            'tenant_id' => $user->id,
+            'users_id' => $user->id,
             'name' => $user->name,
             'alamat' => 'jl. mawar',
             'no_hp' => '08123797187',

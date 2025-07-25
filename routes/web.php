@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tenant\DataUsahaController;
 use App\Http\Controllers\Tenant\TenantController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +19,18 @@ Route::middleware(['guest'])->group(function () {
 });
 
 // Admin
-Route::middleware(['auth', 'tenant'])->group(function () {
-    Route::resource('/', TenantController::class)->names('tenant.index');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('/admin', AdminController::class)->names('admin.index');
 });
 
+
 // tenant
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('/', AdminController::class)->names('admin.index');
+Route::middleware(['auth', 'tenant'])->group(function () {
+    Route::resource('/tenant', TenantController::class)->names('tenant.index');
+    Route::resource('/dataUsaha', DataUsahaController::class)->names('tenant.dataUsaha');
+    
 });
+
 
 
 

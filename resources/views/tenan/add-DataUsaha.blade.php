@@ -21,9 +21,6 @@
         <form action="{{ route('tenant.dataUsaha.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
 
-            {{-- ID user login --}}
-            {{-- <input type="hidden" name="pengajuan_id" value="{{ auth()->id() }}"> --}}
-
             <div>
                 <label class="block font-semibold mb-1">Tanggal Pengajuan</label>
                 <input type="date" name="tanggal_pengajuan" class="w-full border-gray-300 rounded px-3 py-2" required>
@@ -45,7 +42,6 @@
                 <textarea name="deskripsi" class="w-full border-gray-300 rounded px-3 py-2" rows="4" required></textarea>
             </div>
 
-            {{-- Tidak ada input untuk status atau komentar di sini --}}
 
             <div>
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">

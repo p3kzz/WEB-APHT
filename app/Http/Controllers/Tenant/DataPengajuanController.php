@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengajuan;
+use App\Models\TenantModel; // Pastikan ini di-import
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // Import Auth facade
 
 class DataPengajuanController extends Controller
 {
@@ -12,7 +15,26 @@ class DataPengajuanController extends Controller
      */
     public function index()
     {
-        return view('tenan.dataUnitUsaha');
+        // Ambil ID pengguna yang sedang login
+        $userId = Auth::id();
+
+        // Cari data tenant berdasarkan ID pengguna yang login
+        $tenant = TenantModel::where('users_id', $userId)->first();
+
+        // Inisialisasi koleksi pengajuan kosong
+        $pengajuan = collect();
+
+        // Jika tenant ditemukan, ambil data pengajuan yang terkait dengan tenant tersebut
+        if ($tenant) {
+            $pengajuan = Pengajuan::where('tenant_id', $tenant->id)->get();
+        } else {
+            // Opsional: Anda bisa menambahkan logika untuk menangani jika tenant tidak ditemukan
+            // Misalnya, redirect atau tampilkan pesan error
+            // return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
+        }
+
+        // Teruskan data pengajuan ke view
+        return view('tenan.dataUnitUsaha', compact('pengajuan'));
     }
 
     /**

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengajuan_id')->constrained('tenant');
+            $table->foreignId('tenant_id')->constrained('tenant');
             $table->date('tanggal_pengajuan');
             $table->string('unit_usaha');
             $table->string('file_pengajuan');

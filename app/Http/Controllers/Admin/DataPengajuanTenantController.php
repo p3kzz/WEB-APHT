@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Tenant;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DataPengajuanController extends Controller
+class DataPengajuanTenantController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('tenan.dataUnitUsaha');
+        return view('admin.dataPengajuan');
     }
 
     /**

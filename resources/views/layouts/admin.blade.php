@@ -26,11 +26,11 @@
                                 alt=""></div>
                         <span>Dashboard</span>
                     </a>
-                    <a href="dataUsaha"
+                    <a href="PengajuanTenant"
                         class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
                         <div class="w-5 h-5 bg-white-200 rounded"><img
                                 src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
-                        <span>Data Unit Usaha</span>
+                        <span>Data pengajuan</span>
                     </a>
                     <a href="#"
                         class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">

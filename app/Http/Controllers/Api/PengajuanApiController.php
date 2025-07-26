@@ -28,7 +28,7 @@ class PengajuanApiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pengajuan_id' => 'required|exists:users,id',
+            'pengajuan_id' => 'required|exists:tenant,id',
             'tanggal_pengajuan' => 'required|date',
             'unit_usaha' => 'required|string',
             'file_pengajuan' => 'required|file|mimes:pdf,jpg,jpeg,png',
@@ -129,8 +129,8 @@ class PengajuanApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil di update',
-            'data' => $pengajuan 
-        ], 200);
+            'data' => $pengajuan
+        ], 200); 
     }
 
     /**

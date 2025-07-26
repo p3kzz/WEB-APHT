@@ -64,6 +64,36 @@
                             </a>
                         </div>
                     </div>
+                    <div class="relative">
+                        <button type="button"
+                            class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
+                            onclick="toggleDropdown('laporanDropdown')">
+                            <div class="w-5 h-5 flex items-center justify-center"><img
+                                    src="{{ asset('assets/img/upload-file.png') }}" alt="Pengajuan Icon"
+                                    class="w-full h-full object-contain"></div>
+                            <span>Laporan</span>
+                            <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
+                                id="pengajuanDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="laporanDropdown" class="hidden pl-8 mt-1 space-y-2">
+                            <a href="laporanproduksi"
+                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                <span>Laporan Produksi</span>
+                            </a>
+                            <a href="dataPengajuan"
+                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                <span>Laporan Keuangan</span>
+                            </a>
+                            <a href="dataPengajuan"
+                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                <span>Data Laporan</span>
+                            </a>
+                        </div>
+                    </div>
                     <a href="#"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img

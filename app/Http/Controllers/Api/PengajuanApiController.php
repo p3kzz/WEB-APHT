@@ -129,7 +129,7 @@ class PengajuanApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil di update',
-            'data' => $pengajuan
+            'data' => $pengajuan 
         ], 200);
     }
 

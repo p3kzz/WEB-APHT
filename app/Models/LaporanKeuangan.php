@@ -10,12 +10,12 @@ class LaporanKeuangan extends Model
     use HasFactory;
     protected $table = 'laporan_keuangan';
     protected $fillable = [
-        'LK_id',
-        'TP_id',
+        'tenant_id',
+        'produksi_id',
         'keterangan',
         'tanggal_produksi',
         'deskripsi',
-        'file_lk'
+        'jumlah'
     ];
 
     public function produksi()

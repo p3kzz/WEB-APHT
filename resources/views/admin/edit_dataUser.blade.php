@@ -27,28 +27,41 @@
     </div>
 
     <!-- Title -->
-    <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Login Your Account</h2>
+    <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Update Data User</h2>
 
     <!-- Form -->
-    <form method="POST" action="">
-        @csrf
+    <form action="" method="POST">
+      @csrf
       <!-- Username -->
       <div class="mb-4">
-        <label class="block text-sm text-gray-700 mb-1" for="username">Email</label>
-        <input  name="email" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
+        <label class="block text-sm text-gray-700 mb-1" for="username">Username</label>
+        <input id="username" name="name" value="{{ $users->name }}" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
       </div>
-
+      <div class="mb-4">
+        <label class="block text-sm text-gray-700 mb-1" for="email">Email</label>
+        <input id="email" name="email" value="{{ $users->email }}" type="email" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required />
+      </div>
       <!-- Password with eye toggle -->
       <div class="mb-6 relative">
         <label class="block text-sm text-gray-700 mb-1" for="password">Password</label>
-        <input  type="password"  name="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
+        <input id="password" name="password" value="{{ $users->password }}" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
         <div class="absolute right-0 bottom-1 cursor-pointer p-2" onclick="togglePassword()">
           <i data-feather="eye" class="w-4 h-4" id="toggleIcon"></i>
         </div>
       </div>
 
+      <!-- Role -->
+      <div class="mb-4">
+        <label class="block text-sm text-gray-700 mb-1" for="role">Role</label>
+        <select name="role" id="role" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required>
+          <option value="">Pilih Role</option>
+          <option value="tenant" {{ $users->role == 'tenant' ? 'selected' : '' }}>Tenant</option>
+          <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>Admin</option>
+        </select>
+      </div>
+
       <!-- Login button -->
-      <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded font-semibold text-sm transition duration-300">Login</button>
+      <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded font-semibold text-sm transition duration-300">Register</button>
     </form>
 
     <p class="text-xs text-center text-gray-600 mt-4">
@@ -87,12 +100,12 @@
       const isHidden = input.type === 'password';
       input.type = isHidden ? 'text' : 'password';
       icon.setAttribute('data-feather', isHidden ? 'eye-off' : 'eye');
-      feather.replace(); // Refresh icon
+      feather.replace();
     }
   </script>
 
   <script>
-  feather.replace(); // refresh icon setiap render
+  feather.replace();
 </script>
 
 </body>

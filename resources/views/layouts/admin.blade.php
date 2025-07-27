@@ -16,6 +16,7 @@
             color: #10B981;
         }
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -31,51 +32,27 @@
                 <img src="{{ asset('assets/img/Group 44.png') }}" class="mb-12 h-20 mx-auto" alt="Logo APHT">
 
                 <nav class="space-y-2 lg:space-y-4">
-                    <a href="tenant"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
+                    <a href="{{ route('admin.index.index') }}"class="flex items-center space-x-3 p-2 rounded-lg font-semibold transition-colors duration-200
+                    {{ request()->routeIs('admin.dataLaporan.index')? 'bg-green-100 text-green-600': 'text-gray-800 hover:bg-green-100 hover:text-green-600'}}">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/dashboard.png') }}" alt="Dashboard Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Dashboard</span>
                     </a>
-
-                    <a href="/DataUnitUsaha" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
-                        <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
-                        <span>Data Unit Usaha</span>
+                    <a href="{{ route('admin.PengajuanTenant.index') }}"
+                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
+                        <div class="w-5 h-5 flex items-center justify-center"><img
+                                src="{{ asset('assets/img/upload-file.png') }}" alt="Dashboard Icon"
+                                class="w-full h-full object-contain"></div>
+                        <span>Data Pengajuan</span>
                     </a>
 
                     <div class="relative">
                         <button type="button"
                             class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
-                            onclick="toggleDropdown('pengajuanDropdown')">
-                            <div class="w-5 h-5 flex items-center justify-center"><img
-                                    src="{{ asset('assets/img/upload-file.png') }}" alt="Pengajuan Icon"
-                                    class="w-full h-full object-contain"></div>
-                            <span>Pengajuan</span>
-                            <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
-                                id="pengajuanDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="pengajuanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="dataUsaha"
-                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
-                                <span>Buat Pengajuan</span>
-                            </a>
-                            <a href="dataPengajuan"
-                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
-                                <span>Data Pengajuan</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <button type="button"
-                            class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
                             onclick="toggleDropdown('laporanDropdown')">
                             <div class="w-5 h-5 flex items-center justify-center"><img
-                                    src="{{ asset('assets/img/upload-file.png') }}" alt="Pengajuan Icon"
+                                    src="{{ asset('assets/img/report.png') }}" alt="Pengajuan Icon"
                                     class="w-full h-full object-contain"></div>
                             <span>Laporan</span>
                             <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
@@ -86,49 +63,37 @@
                             </svg>
                         </button>
                         <div id="laporanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="laporanproduksi"
+                            <a href="{{ route('admin.dataproduksi.index') }}"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Produksi</span>
                             </a>
-                            <a href="dataPengajuan"
+                            <a href="{{ route('admin.datakeuangan.index') }}"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Keuangan</span>
                             </a>
-                            <a href="dataPengajuan"
+                            <a href="{{ route('admin.dataLaporan.index') }}"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Laporan</span>
                             </a>
                         </div>
                     </div>
-
-                    <a href="#"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/report.png') }}" alt="Data Laporan Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Laporan</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/product.png') }}" alt="Data Produksi Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Produksi</span>
-                    </a>
-                    <a href="#"
+                    <a href="{{ route('admin.datamonitoring.index') }}"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data Monitoring Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Data Monitoring</span>
                     </a>
-                    <a href="/dusi"
+                    <a href="{{ route('admin.datauser.tampilkan') }}"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/diagram.png') }}" alt="Data Keuangan Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Keuangan</span>
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <img src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data User Icon"
+                                class="w-full h-full object-contain">
+                        </div>
+                        <span>Data User</span>
                     </a>
+
+
                 </nav>
             </div>
 

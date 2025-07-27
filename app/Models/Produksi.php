@@ -10,14 +10,12 @@ class Produksi extends Model
     use HasFactory;
     protected $table = 'produksi';
     protected $fillable = [
-        'produksi_id',
+        'tenant_id',
         'nama_produk',
-        'bahan_baku',
         'biaya_produksi',
         'tanggal_produksi',
         'jumlah',
         'keterangan',
-        'status',
     ];
 
     public function tenant()

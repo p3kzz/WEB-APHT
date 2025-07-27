@@ -15,6 +15,7 @@
         </div>
     </div>
 
+
     <div class="bg-white rounded shadow p-4 overflow-x-auto">
     <table class="w-full table-auto text-sm min-w-[600px]">
         <thead class="border-b bg-gray-50">
@@ -68,5 +69,6 @@
         </tbody>
     </table>
 </div>
+
 
 @endsection

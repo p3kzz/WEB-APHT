@@ -66,7 +66,7 @@ class DataUsahaController extends Controller
             'komentar' => null,
         ]);
 
-        return redirect()->route('tenant.dataUsaha.index')->with('success', 'Pengajuan berhasil dikirim!');
+        return redirect()->route('tenant.dataPengajuan.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 
 

@@ -7,6 +7,7 @@ use App\Models\Pengajuan;
 use App\Models\TenantModel; // Pastikan ini di-import
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Import Auth facade
+use Illuminate\Support\Facades\Storage;
 
 class DataPengajuanController extends Controller
 {
@@ -15,22 +16,13 @@ class DataPengajuanController extends Controller
      */
     public function index()
     {
-        // Ambil ID pengguna yang sedang login
         $userId = Auth::id();
-
-        // Cari data tenant berdasarkan ID pengguna yang login
         $tenant = TenantModel::where('users_id', $userId)->first();
-
-        // Inisialisasi koleksi pengajuan kosong
         $pengajuan = collect();
-
-        // Jika tenant ditemukan, ambil data pengajuan yang terkait dengan tenant tersebut
         if ($tenant) {
             $pengajuan = Pengajuan::where('tenant_id', $tenant->id)->get();
         } else {
-            // Opsional: Anda bisa menambahkan logika untuk menangani jika tenant tidak ditemukan
-            // Misalnya, redirect atau tampilkan pesan error
-            // return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
+            return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
         }
 
         // Teruskan data pengajuan ke view
@@ -66,7 +58,8 @@ class DataPengajuanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pengajuan = Pengajuan::find($id);
+        return view('tenan.update-dataPengajuan', compact('pengajuan'));
     }
 
     /**
@@ -74,7 +67,43 @@ class DataPengajuanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pengajuan = Pengajuan::find($id);
+        if (!$pengajuan) {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'pengajuan tidak ditemukan']);
+        }
+
+        $userId = Auth::id();
+        $tenant = TenantModel::where('users_id', $userId)->first();
+        if (!$tenant || $pengajuan->tenant_id !== $tenant->id) {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Anda tidak memiliki izin untuk memperbarui pengajuan ini.']);
+        }
+
+        $update = [
+            'tanggal_pengajuan' => 'required|date',
+            'unit_usaha' => 'required|string',
+            'deskripsi' => 'required|string',
+            'file_pengajuan' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ];
+
+        $validatedData = $request->validate($update);
+
+
+        if ($request->hasFile('file_pengajuan')) {
+            if ($pengajuan->file_pengajuan && Storage::disk('public')->exists($pengajuan->file_pengajuan)) {
+                Storage::disk('public')->delete($pengajuan->file_pengajuan);
+            }
+
+            $file = $request->file('file_pengajuan');
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('pengajuan', $fileName, 'public');
+            $validatedData['file_pengajuan'] = $filePath;
+        }
+        if ($pengajuan->status === 'ditolak') {
+            $validatedData['status'] = 'pending';
+            $validatedData['komentar'] = null;
+        }
+        $pengajuan->update($validatedData);
+        return redirect()->route('tenant.dataPengajuan.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 
     /**

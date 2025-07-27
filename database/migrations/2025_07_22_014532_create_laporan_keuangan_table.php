@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('LK_id')->constrained('tenant');
+            $table->foreignId('tenant_id')->constrained('tenant');
+            $table->foreignId('produksi_id')->constrained('produksi');
             $table->enum('keterangan', ['Pemasukan', 'pengeluaran', 'labarugi']);
             $table->date('tanggal_produksi');
+            $table->integer('jumlah');
             $table->string('deskripsi');
-            $table->string('file_lk');
             $table->timestamps();
         });
     }

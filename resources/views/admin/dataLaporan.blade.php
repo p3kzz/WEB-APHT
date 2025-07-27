@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+
+<h1>SELAMAT DATANG LAPORAN </h1>
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
         <input type="text" placeholder="Search" class="w-full  p-2 border border-gray-300 rounded-full" />
         <div class="w-8 h-8 bg-white-200 rounded-full"><img src="{{ asset('assets/img/notification.png') }}" alt="">
         </div>
@@ -27,24 +29,21 @@
             <thead class="border-b bg-gray-50">
                 <tr class="text-left text-gray-600">
                     <th class="py-2 px-3">No</th>
-                    <th class="py-2 px-3">Nama Tenan</th>
-                    <th class="py-2 px-3">Lokasi</th>
-                    <th class="py-2 px-3">Kontak</th>
-                    <th class="py-2 px-3 text-center">Status</th>
+                    <th class="py-2 px-3">Keterangan</th>
+                    <th class="py-2 px-3">Tanggal</th>
+                    <th class="py-2 px-3">Jumlah</th>
+                    <th class="py-2 px-3">Deskripsi</th>
                     <th class="py-2 px-3 text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="border-t hover:bg-gray-50">
                     <td class="py-2 px-3">1.</td>
-                    <td class="py-2 px-3">Tembakau Kita</td>
-                    <td class="py-2 px-3">Batuan, Sumenep</td>
-                    <td class="py-2 px-3">+62 821 1696 5805</td>
-                    <td class="py-2 px-3 text-center">
-                        <span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold text-sm">
-                            Aktif
-                        </span>
-                    </td>
+                    <td class="py-2 px-3">Pemasukan</td>
+                    <td class="py-2 px-3">11-January-2020</td>
+                    <td class="py-2 px-3">Rp. 2000.000 </td>
+                    <td class="py-2 px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates facilis maxime deserunt est dignissimos, non in dolorum ullam temporibus consequatur rerum cupiditate vero assumenda delectus, quae fuga. Deleniti, est ipsa.</td>
+
                     <td class="py-2 px-3 text-center">
                         <div class="inline-flex gap-2">
                             <button type="button"

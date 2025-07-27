@@ -39,6 +39,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
     Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
     Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
+
 });
 
 

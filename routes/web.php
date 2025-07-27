@@ -28,6 +28,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/admin', AdminController::class)->names('admin.index');
     Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
+    Route::get('/pengajuan/edit/{id}', [ DataPengajuanTenantController::class, 'editStatus'])->name('pengajuan/edit/{id}');
+    Route::post('/pengajuan/edit/{id}', [ DataPengajuanTenantController::class,'updateStatus']);
 });
 
 

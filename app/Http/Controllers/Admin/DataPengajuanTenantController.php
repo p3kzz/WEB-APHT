@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 
 class DataPengajuanTenantController extends Controller
@@ -12,7 +13,26 @@ class DataPengajuanTenantController extends Controller
      */
     public function index()
     {
-        return view('admin.dataPengajuan');
+        $pengajuan = Pengajuan::all();
+        return view('admin.dataPengajuan', compact('pengajuan'));
+    }
+
+
+    public function editStatus($id)
+    {
+        $editPengajuan = Pengajuan::findOrFail($id);
+        return view('admin.editPengajuan', compact('editPengajuan'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $editPengajuan = [
+            'status'=>$request->status,
+            'komentar'=>$request->komentar,
+        ];
+
+        Pengajuan::where('id', $id)->update($editPengajuan);
+        return redirect('/PengajuanTenant');
     }
 
     /**
@@ -20,7 +40,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

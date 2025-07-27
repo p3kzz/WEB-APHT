@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DataPengajuanTenantController extends Controller
+class DataMonitoringContoller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.dataPengajuan');
+        return view('admin.dataMonitoring');
     }
 
     /**
@@ -36,7 +36,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function show(string $id)
     {
-        
+        //
     }
 
     /**

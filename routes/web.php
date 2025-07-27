@@ -1,12 +1,22 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\Admin\DataKeuanganContoller;
+use App\Http\Controllers\Admin\DatalaporanContoller;
+use App\Http\Controllers\Admin\DataMonitoringContoller;
+use App\Http\Controllers\Admin\DataPengajuanController as AdminDataPengajuanController;
+
 use App\Http\Controllers\Admin\DataPengajuanTenantController;
+use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tenant\dataLaporanController;
 use App\Http\Controllers\Tenant\DataPengajuanController;
 use App\Http\Controllers\Tenant\DataUsahaController;
 use App\Http\Controllers\Tenant\laporanProduksiController;
+use App\Http\Controllers\Tenant\laporanKeuanganController;
+use App\Http\Controllers\Tenant\monitoringController;
 use App\Http\Controllers\Tenant\TenantController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +35,10 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/admin', AdminController::class)->names('admin.index');
     Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
+    Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin.dataLaporan');
+    Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
+    Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
+    Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
 });
 
 
@@ -34,6 +48,9 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('/dataUsaha', DataUsahaController::class)->names('tenant.dataUsaha');
     Route::resource('/dataPengajuan', DataPengajuanController::class)->names('tenant.dataPengajuan');
     Route::resource('/laporanproduksi', laporanProduksiController::class)->names('tenant.laporanproduksi');
+    Route::resource('/laporankeuangan', laporanKeuanganController::class)->names('tenant.laporankeuangan');
+    Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
+    Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
 });
 
 

@@ -160,7 +160,7 @@
                                 <td class="px-6 py-4 text-sm block md:table-cell text-right md:text-left" data-label="Aksi">
                                     <span class="md:hidden font-semibold text-gray-600">Aksi: </span>
                                     @if ($data->status == 'ditolak')
-                                        <a href="{{ route('tenant.dataUsaha.edit', $data->id) }}"
+                                        <a href="{{ route('tenant.dataPengajuan.edit', $data->id) }}"
                                             class="inline-flex items-center px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full hover:bg-blue-600 transition-colors duration-200">
                                             Update Pengajuan
                                         </a>

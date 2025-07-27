@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('produksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produksi_id')->constrained('tenant');
+            $table->foreignId('tenant_id')->constrained('tenant');
             $table->string('nama_produk');
-            $table->string('bahan_baku');
             $table->integer('biaya_produksi');
             $table->date('tanggal_produksi');
             $table->integer('jumlah');
-            $table->string('keterangan')->nullable();
-            $table->enum('status', ['pending', 'disetujui', 'tolak'])->default('pending');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }

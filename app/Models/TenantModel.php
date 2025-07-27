@@ -10,7 +10,7 @@ class TenantModel extends Model
     use HasFactory;
     protected $table = 'tenant';
     protected $fillable = [
-        'tenant_id',
+        'users_id',
         'name',
         'alamat',
         'no_hp',
@@ -23,7 +23,7 @@ class TenantModel extends Model
     }
     public function pengajuan()
     {
-        return $this->hasMany(Pengajuan::class);
+        return $this->hasMany(Pengajuan::class, 'tenant_id');
     }
     public function produksi()
     {

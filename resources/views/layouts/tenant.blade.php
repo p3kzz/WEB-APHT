@@ -38,6 +38,7 @@
                                 class="w-full h-full object-contain"></div>
                         <span>Dashboard</span>
                     </a>
+
                     <div class="relative">
                         <button type="button"
                             class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
@@ -54,53 +55,79 @@
                             </svg>
                         </button>
                         <div id="pengajuanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="dataUsaha"
+                            <a href="{{ route('tenant.dataUsaha.create') }}"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Buat Pengajuan</span>
                             </a>
-                            <a href="dataPengajuan"
+                            <a href="{{ route('tenant.dataPengajuan.index') }}" {{-- Pastikan ini adalah rute yang benar untuk Data Pengajuan --}}
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Pengajuan</span>
                             </a>
                         </div>
                     </div>
+
+                    @php
+                        use Illuminate\Support\Facades\Auth;
+                        $hasApprovedPengajuan = false;
+                        if (Auth::check() && Auth::user()->tenant) {
+                            $hasApprovedPengajuan = Auth::user()
+                                ->tenant->pengajuan()
+                                ->where('status', 'disetujui')
+                                ->exists();
+                        }
+                    @endphp
+
                     <div class="relative">
-                        <button type="button"
-                            class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
-                            onclick="toggleDropdown('laporanDropdown')">
-                            <div class="w-5 h-5 flex items-center justify-center"><img
-                                    src="{{ asset('assets/img/upload-file.png') }}" alt="Pengajuan Icon"
-                                    class="w-full h-full object-contain"></div>
-                            <span>Laporan</span>
-                            <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
-                                id="pengajuanDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="laporanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="laporanproduksi"
-                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
-                                <span>Laporan Produksi</span>
-                            </a>
-                            <a href="laporankeuangan"
-                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
-                                <span>Laporan Keuangan</span>
-                            </a>
-                            <a href="datalaporan"
-                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
-                                <span>Data Laporan</span>
-                            </a>
-                        </div>
+
+                        @if ($hasApprovedPengajuan)
+                            <button type="button"
+                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold w-full text-left transition-colors duration-200"
+                                onclick="toggleDropdown('laporanDropdown')">
+                                <div class="w-5 h-5 flex items-center justify-center"><img
+                                        src="{{ asset('assets/img/report.png') }}" alt="Laporan Icon"
+                                        class="w-full h-full object-contain"></div>
+                                <span>Laporan</span>
+                                <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
+                                    id="laporanDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="laporanDropdown" class="hidden pl-8 mt-1 space-y-2">
+                                <a href="laporanproduksi"
+                                    class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                    <span>Laporan Produksi</span>
+                                </a>
+                                <a href="laporankeuangan"
+                                    class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                    <span>Laporan Keuangan</span>
+                                </a>
+                                <a href="dataPengajuan"
+                                    class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
+                                    <span>Data Laporan</span>
+                                </a>
+                            </div>
+                        @else
+                            <span
+                                class="flex items-center space-x-3 p-2 rounded-lg text-gray-400 font-semibold cursor-not-allowed"
+                                title="Anda perlu memiliki pengajuan yang disetujui untuk mengakses laporan.">
+                                <div class="w-5 h-5 flex items-center justify-center"><img
+                                        src="{{ asset('assets/img/report.png') }}" alt="Laporan Icon"
+                                        class="w-full h-full object-contain opacity-50"></div>
+                                <span>Laporan</span>
+                                <svg class="ml-auto w-4 h-4 transform transition-transform duration-200"
+                                    id="laporanDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </span>
+                        @endif
+
                     </div>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/report.png') }}" alt="Data Laporan Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Laporan</span>
-                    </a>
+
+                    <!-- Data Produksi Link -->
                     <a href="#"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
@@ -108,13 +135,17 @@
                                 class="w-full h-full object-contain"></div>
                         <span>Data Produksi</span>
                     </a>
+
+                    <!-- Data Monitoring Link -->
                     <a href="monitoring"
+
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data Monitoring Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Data Monitoring</span>
                     </a>
+                    <!-- Data Keuangan Link -->
                     <a href="/dusi"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
@@ -162,40 +193,51 @@
     </div>
 
     <script>
-        function toggleDropdown(id) {
-            const dropdown = document.getElementById(id);
-            const icon = document.getElementById(id + 'Icon');
+        document.addEventListener('DOMContentLoaded', () => {
+            window.toggleDropdown = function(id) {
+                const dropdown = document.getElementById(id);
+                const icon = document.getElementById(id + 'Icon');
 
-            dropdown.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
-        }
+                if (dropdown && icon) {
+                    dropdown.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                }
+            };
 
-        function openSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
-        }
+            window.openSidebar = function() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                if (sidebar && overlay) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                }
+            };
 
-        function closeSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        }
-
-        window.addEventListener('resize', () => {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            if (window.innerWidth >= 1024) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.add('hidden');
-            } else {
-                if (!sidebar.classList.contains('-translate-x-full') && !overlay.classList.contains('hidden')) {
+            window.closeSidebar = function() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                if (sidebar && overlay) {
                     sidebar.classList.add('-translate-x-full');
                     overlay.classList.add('hidden');
                 }
-            }
+            };
+
+            window.addEventListener('resize', () => {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                if (sidebar && overlay) {
+                    if (window.innerWidth >= 1024) {
+                        sidebar.classList.remove('-translate-x-full');
+                        overlay.classList.add('hidden');
+                    } else {
+                        if (!sidebar.classList.contains('-translate-x-full') && !overlay.classList.contains(
+                                'hidden')) {
+                            sidebar.classList.add('-translate-x-full');
+                            overlay.classList.add('hidden');
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>

@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DataKeuanganContoller;
+use App\Http\Controllers\Admin\DatalaporanContoller;
+use App\Http\Controllers\Admin\DataMonitoringContoller;
 use App\Http\Controllers\Admin\DataPengajuanController as AdminDataPengajuanController;
 use App\Http\Controllers\Admin\DataPengajuanTenantController;
+use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Tenant\DataPengajuanController;
@@ -25,6 +29,10 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/admin', AdminController::class)->names('admin.index');
     Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
+    Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin.dataLaporan');
+    Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
+    Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
+    Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
 });
 
 

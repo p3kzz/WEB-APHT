@@ -84,11 +84,11 @@
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Produksi</span>
                             </a>
-                            <a href="dataPengajuan"
+                            <a href="laporankeuangan"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Keuangan</span>
                             </a>
-                            <a href="dataPengajuan"
+                            <a href="datalaporan"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Laporan</span>
                             </a>
@@ -108,7 +108,7 @@
                                 class="w-full h-full object-contain"></div>
                         <span>Data Produksi</span>
                     </a>
-                    <a href="#"
+                    <a href="monitoring"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data Monitoring Icon"

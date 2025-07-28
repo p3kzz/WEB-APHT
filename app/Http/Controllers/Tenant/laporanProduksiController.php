@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Produksi;
+use App\Models\TenantModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class laporanProduksiController extends Controller
 {
@@ -20,7 +23,7 @@ class laporanProduksiController extends Controller
      */
     public function create()
     {
-        //
+        return view('tenan.laporanProduksi');
     }
 
     /**
@@ -28,7 +31,26 @@ class laporanProduksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_produk' => 'required|string|max:255',
+            'biaya_produksi' => 'required|integer',
+            'tanggal_produksi' => 'required|date',
+            'jumlah' => 'required|integer'
+        ]);
+        $userId = Auth::id();
+        $tenant = TenantModel::where('users_id', $userId)->first();
+        if (!$tenant) {
+            return back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini. Harap lengkapi profil tenant Anda terlebih dahulu.'])->withInput();
+        }
+        Produksi::create([
+            'tenant_id' => $tenant->id,
+            'nama_produk' => $request->nama_produk,
+            'biaya_produksi' => $request->biaya_produksi,
+            'tanggal_produksi' => $request->tanggal_produksi,
+            'jumlah' => $request->jumlah,
+            'deskripsi' => null,
+        ]);
+        return redirect()->route('tenant.laporanproduksi.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 
     /**

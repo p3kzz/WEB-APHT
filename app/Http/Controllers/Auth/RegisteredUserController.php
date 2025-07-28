@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
     return redirect()->route('admin.datauser.tampilkan')->with('success', 'User berhasil didaftarkan.');
     }
 
+
    public function edit_DataUser($id) {
    $users = User::findOrFail($id);
    return view('admin.edit_dataUser', compact('users'));

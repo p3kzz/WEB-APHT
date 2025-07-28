@@ -1,38 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 
-class DataPengajuanTenantController extends Controller
+class dataLaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $pengajuan = Pengajuan::all();
-        return view('admin.dataPengajuan', compact('pengajuan'));
+        return view('tenan.dataLaporan');
     }
 
-
-    public function editStatus($id)
-    {
-        $editPengajuan = Pengajuan::findOrFail($id);
-        return view('admin.editPengajuan', compact('editPengajuan'));
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $editPengajuan = [
-            'status'=>$request->status,
-            'komentar'=>$request->komentar,
-        ];
-
-        Pengajuan::where('id', $id)->update($editPengajuan);
-        return redirect('/PengajuanTenant');
+    public function datLaporanView(){
+        return view('tenan.dataProduksi');
     }
 
     /**
@@ -40,7 +24,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -56,7 +40,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function show(string $id)
     {
-        
+        //
     }
 
     /**

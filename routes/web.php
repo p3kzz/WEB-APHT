@@ -12,9 +12,12 @@ use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tenant\dataLaporanController;
 use App\Http\Controllers\Tenant\DataPengajuanController;
 use App\Http\Controllers\Tenant\DataUsahaController;
 use App\Http\Controllers\Tenant\laporanProduksiController;
+use App\Http\Controllers\Tenant\laporanKeuanganController;
+use App\Http\Controllers\Tenant\monitoringController;
 use App\Http\Controllers\Tenant\TenantController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TenantControllers;
@@ -44,6 +47,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser']);
     Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser']);
      Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
+
 });
 
 Route::get('/DataUnitUsaha', [TenantControllers::class, 'index']);
@@ -57,6 +61,9 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('/dataUsaha', DataUsahaController::class)->names('tenant.dataUsaha');
     Route::resource('/dataPengajuan', DataPengajuanController::class)->names('tenant.dataPengajuan');
     Route::resource('/laporanproduksi', laporanProduksiController::class)->names('tenant.laporanproduksi');
+    Route::resource('/laporankeuangan', laporanKeuanganController::class)->names('tenant.laporankeuangan');
+    Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
+    Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
 });
 
 

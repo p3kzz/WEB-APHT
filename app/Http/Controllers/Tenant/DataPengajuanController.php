@@ -25,7 +25,6 @@ class DataPengajuanController extends Controller
             return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
         }
 
-        // Teruskan data pengajuan ke view
         return view('tenan.dataUnitUsaha', compact('pengajuan'));
     }
 

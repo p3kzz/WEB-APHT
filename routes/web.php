@@ -5,8 +5,6 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataKeuanganContoller;
 use App\Http\Controllers\Admin\DatalaporanContoller;
 use App\Http\Controllers\Admin\DataMonitoringContoller;
-use App\Http\Controllers\Admin\DataPengajuanController as AdminDataPengajuanController;
-
 use App\Http\Controllers\Admin\DataPengajuanTenantController;
 use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;

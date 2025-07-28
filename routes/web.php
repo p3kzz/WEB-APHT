@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DataPengajuanController as AdminDataPengajuanCont
 use App\Http\Controllers\Admin\DataPengajuanTenantController;
 use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Tenant\dataLaporanController;
 use App\Http\Controllers\Tenant\DataPengajuanController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Tenant\laporanKeuanganController;
 use App\Http\Controllers\Tenant\monitoringController;
 use App\Http\Controllers\Tenant\TenantController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TenantControllers;
 
 
 Route::get('/', function () {
@@ -39,9 +41,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
     Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
     Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
+    Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin.datauser.tampilkan');
+    Route::resource('/register', RegisteredUserController::class)->names('auth.register');
+    Route::post('/register/create', [RegisteredUserController::class, 'store'])->name('auth.register.store');
+    Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser']);
+    Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser']);
+     Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
 
 });
 
+Route::get('/DataUnitUsaha', [TenantControllers::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
 
 // tenant
 Route::middleware(['auth', 'tenant'])->group(function () {
@@ -53,6 +65,7 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
     Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
 });
+
 
 
 

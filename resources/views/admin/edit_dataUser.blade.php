@@ -27,7 +27,7 @@
     </div>
 
     <!-- Title -->
-    <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Register New Account</h2>
+    <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Update Data User</h2>
 
     <!-- Form -->
     <form action="" method="POST">
@@ -35,24 +35,19 @@
       <!-- Username -->
       <div class="mb-4">
         <label class="block text-sm text-gray-700 mb-1" for="username">Username</label>
-        <input id="username" name="name" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
+        <input id="username" name="name" value="{{ $users->name }}" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
       </div>
       <div class="mb-4">
         <label class="block text-sm text-gray-700 mb-1" for="email">Email</label>
-        <input id="email" name="email" type="email" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required />
+        <input id="email" name="email" value="{{ $users->email }}" type="email" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required />
       </div>
       <!-- Password with eye toggle -->
       <div class="mb-6 relative">
         <label class="block text-sm text-gray-700 mb-1" for="password">Password</label>
-        <input id="password" name="password" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
+        <input id="password" name="password" value="{{ $users->password }}" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
         <div class="absolute right-0 bottom-1 cursor-pointer p-2" onclick="togglePassword()">
           <i data-feather="eye" class="w-4 h-4" id="toggleIcon"></i>
         </div>
-      </div>
-      <!-- Password Confirmation -->
-      <div class="mb-6 relative">
-        <label class="block text-sm text-gray-700 mb-1" for="password_confirmation">Confirm Password</label>
-        <input id="password_confirmation" name="password_confirmation" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
       </div>
 
       <!-- Role -->
@@ -60,8 +55,8 @@
         <label class="block text-sm text-gray-700 mb-1" for="role">Role</label>
         <select name="role" id="role" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required>
           <option value="">Pilih Role</option>
-          <option value="tenant">Tenant</option>
-          <option value="admin">Admin</option>
+          <option value="tenant" {{ $users->role == 'tenant' ? 'selected' : '' }}>Tenant</option>
+          <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>Admin</option>
         </select>
       </div>
 

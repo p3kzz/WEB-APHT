@@ -19,18 +19,21 @@ class TenantModel extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'users_id');
     }
+
     public function pengajuan()
     {
         return $this->hasMany(Pengajuan::class, 'tenant_id');
     }
+
     public function produksi()
     {
-        return $this->hasMany(Produksi::class);
+        return $this->hasMany(Produksi::class, 'tenant_id');
     }
+
     public function LaporanKeuangan()
     {
-        return $this->hasMany(LaporanKeuangan::class);
+        return $this->hasMany(LaporanKeuangan::class, 'tenant_id');
     }
 }

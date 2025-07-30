@@ -17,31 +17,10 @@ class DataPengajuanTenantController extends Controller
         return view('admin.dataPengajuan', compact('pengajuan'));
     }
 
-
-    public function editStatus($id)
-    {
-        $editPengajuan = Pengajuan::findOrFail($id);
-        return view('admin.editPengajuan', compact('editPengajuan'));
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $editPengajuan = [
-            'status'=>$request->status,
-            'komentar'=>$request->komentar,
-        ];
-
-        Pengajuan::where('id', $id)->update($editPengajuan);
-        return redirect('/PengajuanTenant');
-    }
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -54,17 +33,15 @@ class DataPengajuanTenantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $pengajuan = Pengajuan::findOrFail($id);
+        return view('admin.editPengajuan', compact('pengajuan'));
     }
 
     /**
@@ -72,7 +49,13 @@ class DataPengajuanTenantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pengajuan = [
+            'status' => $request->status,
+            'komentar' => $request->komentar,
+        ];
+
+        Pengajuan::where('id', $id)->update($pengajuan);
+        return redirect()->route('admin.PengajuanTenant.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 
     /**

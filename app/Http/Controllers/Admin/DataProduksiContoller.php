@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Produksi;
 use Illuminate\Http\Request;
 
 class DataProduksiContoller extends Controller
@@ -12,7 +13,8 @@ class DataProduksiContoller extends Controller
      */
     public function index()
     {
-        return view('admin.dataProduksi');
+        $produksi = Produksi::with('tenant.user')->get();
+        return view('admin.dataProduksi', compact('produksi'));
     }
 
     /**

@@ -32,32 +32,32 @@ Route::middleware(['guest'])->group(function () {
 });
 
 // Admin
-    Route::middleware(['auth', 'admin'])->group(function () {
-        Route::resource('/admin', AdminController::class)->names('admin.index');
-        Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
-        Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin.dataLaporan');
-        Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
-        Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
-        Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
-        Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin.datauser.tampilkan');
-        Route::resource('/register', RegisteredUserController::class)->names('auth.register');
-        Route::post('/register/create', [RegisteredUserController::class, 'store'])->name('auth.register.store');
-        Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser']);
-        Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser']);
-        Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
-    });
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('/admin', AdminController::class)->names('admin.index');
+    Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
+    Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin.dataLaporan');
+    Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
+    Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
+    Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
+    Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin.datauser.tampilkan');
+    Route::resource('/register', RegisteredUserController::class)->names('auth.register');
+    Route::post('/register/create', [RegisteredUserController::class, 'store'])->name('auth.register.store');
+    Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser']);
+    Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser']);
+    Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
+});
 
 // tenant
 
-    Route::middleware(['auth', 'tenant'])->group(function () {
-        Route::resource('/tenant', TenantController::class)->names('tenant.index');
-        Route::resource('/dataUsaha', DataUsahaController::class)->names('tenant.dataUsaha');
-        Route::resource('/dataPengajuan', DataPengajuanController::class)->names('tenant.dataPengajuan');
-        Route::resource('/laporanproduksi', laporanProduksiController::class)->names('tenant.laporanproduksi');
-        Route::resource('/laporankeuangan', laporanKeuanganController::class)->names('tenant.laporankeuangan');
-        Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
-        Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
-    });
+Route::middleware(['auth', 'tenant'])->group(function () {
+    Route::resource('/tenant', TenantController::class)->names('tenant.index');
+    Route::resource('/dataUsaha', DataUsahaController::class)->names('tenant.dataUsaha');
+    Route::resource('/dataPengajuan', DataPengajuanController::class)->names('tenant.dataPengajuan');
+    Route::resource('/laporanproduksi', laporanProduksiController::class)->names('tenant.laporanproduksi');
+    Route::resource('/laporankeuangan', laporanKeuanganController::class)->names('tenant.laporankeuangan');
+    Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
+    Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
+});
 
 
 

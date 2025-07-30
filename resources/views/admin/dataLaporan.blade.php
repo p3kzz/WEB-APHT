@@ -1,21 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
-<h1>SELAMAT DATANG LAPORAN </h1>
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
-        <input type="text" placeholder="Search" class="w-full  p-2 border border-gray-300 rounded-full" />
-        <div class="w-8 h-8 bg-white-200 rounded-full"><img src="{{ asset('assets/img/notification.png') }}" alt="">
-        </div>
-        <div class="h-6 w-px bg-gray-300"></div>
-        <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-gray-200 rounded-full"><img src="{{ asset('assets/img/user.png') }}" alt=""></div>
-            <div class="text-right">
-                <div class="text-blue-800 font-bold ">Username</div>
-                <div class="text-xs text-gray-500">Admin</div>
-            </div>
-        </div>
-    </div>
     <div class="flex flex-wrap gap-2 items-center mb-6">
         <button class="px-4 py-2 bg-gray-200 rounded-full">All</button>
         <button class="px-4 py-2 bg-gray-200 rounded-full">Verified</button>
@@ -24,25 +9,40 @@
 
     </div>
 
-    <div class="bg-white rounded shadow p-4 overflow-x-auto">
-        <table class="w-full table-auto text-sm min-w-[600px]">
-            <thead class="border-b bg-gray-50">
-                <tr class="text-left text-gray-600">
-                    <th class="py-2 px-3">No</th>
-                    <th class="py-2 px-3">Keterangan</th>
-                    <th class="py-2 px-3">Tanggal</th>
-                    <th class="py-2 px-3">Jumlah</th>
-                    <th class="py-2 px-3">Deskripsi</th>
-                    <th class="py-2 px-3 text-center">Aksi</th>
+    <div class="bg-white rounded shadow p-4 ">
+        <table class="w-full table-auto text-sm">
+            <thead class="bg-gray-50 hidden md:table-header-group">
+                <tr
+                    class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keterangan
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-t hover:bg-gray-50">
-                    <td class="py-2 px-3">1.</td>
-                    <td class="py-2 px-3">Pemasukan</td>
-                    <td class="py-2 px-3">11-January-2020</td>
-                    <td class="py-2 px-3">Rp. 2000.000 </td>
-                    <td class="py-2 px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates facilis maxime deserunt est dignissimos, non in dolorum ullam temporibus consequatur rerum cupiditate vero assumenda delectus, quae fuga. Deleniti, est ipsa.</td>
+                <tr
+                    class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No"><span
+                            class=" md:hidden font-semibold text-gray-600">No : </span>1.</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan"><span
+                                class=" md:hidden font-semibold text-gray-600">Keterangan : </span>Pemasukan</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal"><span
+                                class=" md:hidden font-semibold text-gray-600">Tanggal : </span>11- Mei - 2023</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah"><span
+                                class=" md:hidden font-semibold text-gray-600">Jumlah : </span>100.000</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi"><span
+                                class=" md:hidden font-semibold text-gray-600">Deskripsi : </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolorum libero, cupiditate reprehenderit numquam quia sunt vero nulla maiores! Saepe, dolorum eos consequatur ullam sunt fuga vel suscipit laboriosam praesentium.</td>
 
                     <td class="py-2 px-3 text-center">
                         <div class="inline-flex gap-2">

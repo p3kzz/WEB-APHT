@@ -32,8 +32,9 @@
                 <img src="{{ asset('assets/img/Group 44.png') }}" class="mb-12 h-20 mx-auto" alt="Logo APHT">
 
                 <nav class="space-y-2 lg:space-y-4">
-                    <a href="{{ route('admin.index.index') }}"class="flex items-center space-x-3 p-2 rounded-lg font-semibold transition-colors duration-200
-                    {{ request()->routeIs('admin.dataLaporan.index')? 'bg-green-100 text-green-600': 'text-gray-800 hover:bg-green-100 hover:text-green-600'}}">
+                    <a
+                        href="{{ route('admin.index.index') }}"class="flex items-center space-x-3 p-2 rounded-lg font-semibold transition-colors duration-200
+                    {{ request()->routeIs('admin.dataLaporan.index') ? 'bg-green-100 text-green-600' : 'text-gray-800 hover:bg-green-100 hover:text-green-600' }}">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/dashboard.png') }}" alt="Dashboard Icon"
                                 class="w-full h-full object-contain"></div>
@@ -129,6 +130,29 @@
                 </button>
             </header>
 
+            <div class="flex flex-row flex-wrap items-center justify-between gap-4 mb-4 px-4">
+                <input type="text" placeholder="Search"
+                    class="flex-1 min-w-[150px]  p-2 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+
+                <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <img src="{{ asset('assets/img/notification.png') }}" alt=""
+                        class="w-5 h-5 object-contain" />
+                </div>
+
+                <div class="w-px h-6 bg-gray-300 hidden md:block"></div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                        <img src="{{ asset('assets/img/user.png') }}" alt="User"
+                            class="object-cover w-full h-full" />
+                    </div>
+                    <div class="hidden md:flex flex-col text-left">
+                        <div class="text-blue-800 font-bold text-sm">Username</div>
+                        <div class="text-xs text-gray-500">Admin</div>
+                    </div>
+                </div>
+
+            </div>
             @yield('content')
         </main>
     </div>

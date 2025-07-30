@@ -1,112 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login APHT</title>
-  <script src="https://unpkg.com/feather-icons"></script> <!-- Feather Icon CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login APHT</title>
+    <script src="https://unpkg.com/feather-icons"></script> <!-- Feather Icon CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="min-h-screen flex items-center justify-center bg-white md:bg-gradient-to-br md:from-green-600 md:to-green-300">
+
+<body
+    class="min-h-screen flex items-center justify-center bg-white md:bg-gradient-to-br md:from-green-600 md:to-green-300">
 
 
-  <div class="bg-white rounded-xl shadow-lg px-8 py-6 pb-16 w-full max-w-sm">
-    <!-- Back Button -->
-    <div class="flex items-center mb-4">
-      <button class="text-sm text-black flex items-center space-x-1">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        <span class="text-xs font-medium">Back</span>
-      </button>
-    </div>
-
-    <!-- Logo -->
-    <div class="flex justify-center mb-4">
-      <img src="{{ asset('assets/img/Group 44.png') }}" alt="Logo" class="h-20 py-1">
-    </div>
-
-    <!-- Title -->
-    <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Update Data User</h2>
-
-    <!-- Form -->
-    <form action="" method="POST">
-      @csrf
-      <!-- Username -->
-      <div class="mb-4">
-        <label class="block text-sm text-gray-700 mb-1" for="username">Username</label>
-        <input id="username" name="name" value="{{ $users->name }}" type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm text-gray-700 mb-1" for="email">Email</label>
-        <input id="email" name="email" value="{{ $users->email }}" type="email" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required />
-      </div>
-      <!-- Password with eye toggle -->
-      <div class="mb-6 relative">
-        <label class="block text-sm text-gray-700 mb-1" for="password">Password</label>
-        <input id="password" name="password" value="{{ $users->password }}" type="password" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
-        <div class="absolute right-0 bottom-1 cursor-pointer p-2" onclick="togglePassword()">
-          <i data-feather="eye" class="w-4 h-4" id="toggleIcon"></i>
+    <div class="bg-white rounded-xl shadow-lg px-8 py-6 pb-16 w-full max-w-sm">
+        <!-- Back Button -->
+        <div class="flex items-center mb-4">
+            <button class="text-sm text-black flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span class="text-xs font-medium">Back</span>
+            </button>
         </div>
-      </div>
 
-      <!-- Role -->
-      <div class="mb-4">
-        <label class="block text-sm text-gray-700 mb-1" for="role">Role</label>
-        <select name="role" id="role" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" required>
-          <option value="">Pilih Role</option>
-          <option value="tenant" {{ $users->role == 'tenant' ? 'selected' : '' }}>Tenant</option>
-          <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>Admin</option>
-        </select>
-      </div>
+        <!-- Logo -->
+        <div class="flex justify-center mb-4">
+            <img src="{{ asset('assets/img/Group 44.png') }}" alt="Logo" class="h-20 py-1">
+        </div>
 
-      <!-- Login button -->
-      <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded font-semibold text-sm transition duration-300">Register</button>
-    </form>
+        <!-- Title -->
+        <h2 class="text-center text-gray-800 font-semibold text-sm mb-6">Update Data User</h2>
 
-    <p class="text-xs text-center text-gray-600 mt-4">
-      Don’t have an account?
-      <a href="#" class="text-blue-600 hover:underline">Contact admin</a>
-    </p>
+        <!-- Form -->
+        <form action="" method="POST">
+            @csrf
+            <!-- Username -->
+            <div class="mb-4">
+                <label class="block text-sm text-gray-700 mb-1" for="username">Username</label>
+                <input id="username" name="name" value="{{ $users->name }}" type="text"
+                    class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm text-gray-700 mb-1" for="email">Email</label>
+                <input id="email" name="email" value="{{ $users->email }}" type="email"
+                    class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm"
+                    required />
+            </div>
+            <!-- Password with eye toggle -->
+            <div class="mb-6 relative">
+                <label class="block text-sm text-gray-700 mb-1" for="password">Password</label>
+                <input id="password" name="password" value="{{ $users->password }}" type="password"
+                    class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm pr-10" />
+                <div class="absolute right-0 bottom-1 cursor-pointer p-2" onclick="togglePassword()">
+                    <i data-feather="eye" class="w-4 h-4" id="toggleIcon"></i>
+                </div>
+            </div>
 
-    <!-- Ikon media sosial -->
-<div class="mt-6 flex justify-center space-x-6">
-  <!-- Instagram -->
-  <a href="#" class="text-gray-600 hover:text-pink-500 transition">
-    <i data-feather="instagram" class="w-5 h-5"></i>
-  </a>
+            <!-- Role -->
+            <div class="mb-4">
+                <label class="block text-sm text-gray-700 mb-1" for="role">Role</label>
+                <select name="role" id="role"
+                    class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-green-600 py-1 text-sm"
+                    required>
+                    <option value="">Pilih Role</option>
+                    <option value="tenant" {{ $users->role == 'tenant' ? 'selected' : '' }}>Tenant</option>
+                    <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                </select>
+            </div>
 
-  <!-- Google (pakai icon 'globe' karena Feather tidak punya logo Google) -->
-  <a href="#" class="text-gray-600 hover:text-red-500 transition">
-    <i data-feather="globe" class="w-5 h-5"></i>
-  </a>
+            <!-- Login button -->
+            <button type="submit"
+                class="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded font-semibold text-sm transition duration-300">Register</button>
+        </form>
 
-  <!-- X (Twitter, pakai icon 'twitter') -->
-  <a href="#" class="text-gray-600 hover:text-blue-500 transition">
-    <i data-feather="twitter" class="w-5 h-5"></i>
-  </a>
-  </div>
+        <p class="text-xs text-center text-gray-600 mt-4">
+            Don’t have an account?
+            <a href="#" class="text-blue-600 hover:underline">Contact admin</a>
+        </p>
 
-    <!-- Footer -->
+        <!-- Ikon media sosial -->
+        <div class="mt-6 flex justify-center space-x-6">
+            <!-- Instagram -->
+            <a href="#" class="text-gray-600 hover:text-pink-500 transition">
+                <i data-feather="instagram" class="w-5 h-5"></i>
+            </a>
 
-  </div>
+            <!-- Google (pakai icon 'globe' karena Feather tidak punya logo Google) -->
+            <a href="#" class="text-gray-600 hover:text-red-500 transition">
+                <i data-feather="globe" class="w-5 h-5"></i>
+            </a>
 
-  <script>
-    feather.replace(); // Load icons
+            <!-- X (Twitter, pakai icon 'twitter') -->
+            <a href="#" class="text-gray-600 hover:text-blue-500 transition">
+                <i data-feather="twitter" class="w-5 h-5"></i>
+            </a>
+        </div>
 
-    function togglePassword() {
-      const input = document.getElementById('password');
-      const icon = document.getElementById('toggleIcon');
-      const isHidden = input.type === 'password';
-      input.type = isHidden ? 'text' : 'password';
-      icon.setAttribute('data-feather', isHidden ? 'eye-off' : 'eye');
-      feather.replace();
-    }
-  </script>
+        <!-- Footer -->
 
-  <script>
-  feather.replace();
-</script>
+    </div>
+
+    <script>
+        feather.replace(); // Load icons
+
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('toggleIcon');
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            icon.setAttribute('data-feather', isHidden ? 'eye-off' : 'eye');
+            feather.replace();
+        }
+    </script>
+
+    <script>
+        feather.replace();
+    </script>
 
 </body>
+
 </html>

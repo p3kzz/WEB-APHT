@@ -90,10 +90,20 @@
                                     <span class="md:hidden font-semibold text-gray-600">Keterangan:
                                     </span>{{ Str::limit($data->keterangan, 50, '...') }}
                                 </td>
-                                <td class="px-6 py-4 text-sm block md:table-cell text-right md:text-left" data-label="Aksi">
-                                    <span class="md:hidden font-semibold text-gray-600">Aksi: </span>
-                                    -
-                                </td>
+                                <td class="py-2 px-3 text-center">
+                            <div class="inline-flex gap-2">
+                                <button type="button"
+                                    class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
+                                    onclick="alert('Aksi edit')">
+                                    Edit
+                                </button>
+                                <button type="button"
+                                    class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
+                                    onclick="confirm('Yakin ingin menghapus?')">
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -135,3 +145,4 @@
         });
     </script>
 @endsection
+

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\LaporanKeuangan;
+use App\Models\Produksi;
+use App\Models\TenantModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class dataLaporanController extends Controller
 {
@@ -12,11 +16,21 @@ class dataLaporanController extends Controller
      */
     public function index()
     {
-        return view('tenan.dataLaporan');
-    }
+        $userId = Auth::id();
+        $tenant = TenantModel::where('users_id', $userId)->first();
 
-    public function datLaporanView(){
-        return view('tenan.dataProduksi');
+        $laporanProduksi = collect();
+        $laporanKeuangan = collect();
+
+        if (!$tenant) {
+            return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
+        }
+        $laporanProduksi = Produksi::where('tenant_id', $tenant->id)->get();
+        $laporanKeuangan = LaporanKeuangan::where('tenant_id', $tenant->id)
+            ->with('produksi') // Memuat relasi produksi
+            ->get();
+
+        return view('tenan.dataLaporan', compact('laporanProduksi', 'laporanKeuangan'));
     }
 
     /**

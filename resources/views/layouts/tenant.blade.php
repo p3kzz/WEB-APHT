@@ -39,11 +39,12 @@
                         <span>Dashboard</span>
                     </a>
 
-
-                    <a href="/DataUnitUsaha" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
-                        <div class="w-5 h-5 bg-white-200 rounded"><img src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
+                    {{-- <a href="/DataUnitUsaha"
+                        class="flex items-center space-x-2 text-gray-800 hover:text-green-600 font-semibold">
+                        <div class="w-5 h-5 bg-white-200 rounded"><img
+                                src="{{ asset('assets/img/business-and-trade.png') }}" alt=""></div>
                         <span>Data Unit Usaha</span>
-                    </a>
+                    </a> --}}
 
                     <div class="relative">
                         <button type="button"
@@ -65,7 +66,7 @@
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Buat Pengajuan</span>
                             </a>
-                            <a href="{{ route('tenant.dataPengajuan.index') }}" {{-- Pastikan ini adalah rute yang benar untuk Data Pengajuan --}}
+                            <a href="dataPengajuan" {{-- Pastikan ini adalah rute yang benar untuk Data Pengajuan --}}
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Pengajuan</span>
                             </a>
@@ -133,23 +134,6 @@
 
                     </div>
 
-
-                    <a href="#"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/report.png') }}" alt="Data Laporan Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Laporan</span>
-                    </a>
-
-                    <a href="#"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/product.png') }}" alt="Data Produksi Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Produksi</span>
-                    </a>
-
                     <!-- Data Monitoring Link -->
                     <a href="monitoring"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
@@ -157,14 +141,6 @@
                                 src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data Monitoring Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Data Monitoring</span>
-                    </a>
-                    <!-- Data Keuangan Link -->
-                    <a href="/dusi"
-                        class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
-                        <div class="w-5 h-5 flex items-center justify-center"><img
-                                src="{{ asset('assets/img/diagram.png') }}" alt="Data Keuangan Icon"
-                                class="w-full h-full object-contain"></div>
-                        <span>Data Keuangan</span>
                     </a>
                 </nav>
             </div>

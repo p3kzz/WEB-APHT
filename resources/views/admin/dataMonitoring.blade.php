@@ -21,7 +21,6 @@
         <button class="px-4 py-2 bg-gray-200 rounded-full">Verified</button>
         <button class="px-4 py-2 bg-gray-200 rounded-full">Not Verified</button>
         <button class="px-4 py-2 bg-gray-100 border rounded-full">Export PDF</button>
-
     </div>
 
     <div class="bg-white rounded shadow p-4 overflow-x-auto">

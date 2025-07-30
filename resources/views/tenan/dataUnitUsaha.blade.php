@@ -28,19 +28,10 @@
         </div>
     </div>
 
-    <div class="flex flex-wrap gap-2 items-center mb-6">
-        <button class="px-4 py-2 bg-gray-200 rounded-full">All</button>
-        <button class="px-4 py-2 bg-gray-200 rounded-full">Verified</button>
-        <button class="px-4 py-2 bg-gray-200 rounded-full">Not Verified</button>
-        <button class="px-4 py-2 bg-gray-100 border rounded-full">Export PDF</button>
-        <a href="">
-            <button class="px-4 py-2 text-white bg-green-500 rounded-full">Tambah</button>
-        </a>
-       
-    </div>
 
 
-    <div class="bg-white rounded shadow p-4 overflow-x-auto">
+
+    {{-- <div class="bg-white rounded shadow p-4 overflow-x-auto">
         <table class="w-full table-auto text-sm">
             <thead class="border-b">
                 <tr class="text-left text-gray-600">
@@ -53,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($tenants as $index => $tenant)
+                @foreach ($tenants as $index => $tenant)
                     <tr class="border-t">
                         <td class="py-2">{{ $index + 1 }}.</td>
                         <td class="py-2">{{ $tenant->name }}</td>
@@ -80,7 +71,7 @@
                 @endforeach
             </tbody>
 
-        </table>
+        </table> --}}
 
 
 

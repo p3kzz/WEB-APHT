@@ -20,11 +20,11 @@ class Produksi extends Model
 
     public function tenant()
     {
-        return $this->belongsTo(TenantModel::class);
+        return $this->belongsTo(TenantModel::class, 'tenant_id');
     }
 
     public function LaporanKeuangan()
     {
-        return $this->hasMany(LaporanKeuangan::class);
+        return $this->hasMany(LaporanKeuangan::class, 'produksi_id');
     }
 }

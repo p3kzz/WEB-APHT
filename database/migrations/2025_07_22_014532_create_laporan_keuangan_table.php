@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tenant_id')->constrained('tenant');
             $table->foreignId('produksi_id')->constrained('produksi');
             $table->enum('keterangan', ['Pemasukan', 'pengeluaran', 'labarugi']);
-            $table->date('tanggal_produksi'); //mengambil tanggal dari produksi
+            $table->date('tanggal_produksi');
             $table->integer('jumlah');
             $table->string('deskripsi');
             $table->timestamps();

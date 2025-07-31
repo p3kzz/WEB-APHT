@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Tenant;
+use App\Models\Produksi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +13,9 @@ class monitoringController extends Controller
      */
     public function index()
     {
-        return view('tenan.monitoring');
+        $produksis = Produksi::with('laporanKeuangan')->get();
+
+        return view('tenan.monitoring', compact('produksis'));
     }
 
     /**

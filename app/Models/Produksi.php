@@ -27,4 +27,9 @@ class Produksi extends Model
     {
         return $this->hasMany(LaporanKeuangan::class, 'produksi_id');
     }
+
+    public function laporanKeuangans()
+    {
+    return $this->hasOne(LaporanKeuangan::class);
+    }
 }

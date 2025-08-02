@@ -66,7 +66,7 @@
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Buat Pengajuan</span>
                             </a>
-                            <a href="dataPengajuan" {{-- Pastikan ini adalah rute yang benar untuk Data Pengajuan --}}
+                            <a href="dataPengajuan"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Pengajuan</span>
                             </a>

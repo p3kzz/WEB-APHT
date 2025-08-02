@@ -18,20 +18,37 @@
                         <th class="py-2 px-3">Tanggal Produksi</th>
                         <th class="py-2 px-3">Jumlah Stok</th>
                         <th class="py-2 px-3 text-center">Pendapatan</th>
-                        <th class="py-2 px-3 text-center">Penngeluaran</th>
+                        <th class="py-2 px-3 text-center">Pengeluaran</th>
                         <th class="py-2 px-3 text-center">Total Laba</th>
                     </tr>
                 </thead>
             <tbody>
                 @foreach ($produksis as $item)
                     <tr class="border-t hover:bg-gray-50">
-                        <td class="py-2 px-3">1.</td>
+                        <td class="py-2 px-3">{{ $loop->iteration }}.</td>
                         <td class="py-2 px-3">{{ $item->nama_produk }}</td>
                         <td class="py-2 px-3">{{ $item->tanggal_produksi }}</td>
                         <td class="py-2 px-3">{{ $item->jumlah }}</td>
-                        <td class="py-2 px-3">{{ $item->keterangan }}</td>
-                        <td class="py-2 px-3">{{ $item->deskripsi }}</td>
-                    </tr>
+                        @php
+                        $pemasukan = $item->laporanKeuangan->firstWhere('keterangan', 'Pemasukan');
+                        $pengeluaran = $item->laporanKeuangan->firstWhere('keterangan', 'pengeluaran');
+
+                        $jumlahPemasukan = $pemasukan?->jumlah ?? 0;
+                        $jumlahPengeluaran = $pengeluaran?->jumlah ?? 0;
+
+                        $labaRugi = $jumlahPemasukan - $jumlahPengeluaran;
+                    @endphp
+
+                    <td class="py-2 px-3">
+                        {{ $jumlahPemasukan ? 'Rp ' . number_format($jumlahPemasukan, 0, ',', '.') : '-' }}
+                    </td>
+                    <td class="py-2 px-3">
+                        {{ $jumlahPengeluaran ? 'Rp ' . number_format($jumlahPengeluaran, 0, ',', '.') : '-' }}
+                    </td>
+                    <td class="py-2 px-3">
+                        {{ 'Rp ' . number_format($labaRugi, 0, ',', '.') }}
+                    </td>
+
                 @endforeach
             </tbody>
         </table>

@@ -22,6 +22,7 @@ class LaporanKeuangan extends Model
     {
         return $this->belongsTo(Produksi::class);
     }
+    
     public function tenant()
     {
         return $this->belongsTo(TenantModel::class);

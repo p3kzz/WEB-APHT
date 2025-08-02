@@ -24,7 +24,6 @@ class laporanKeuanganController extends Controller
         }
 
         $produksiList = Produksi::where('tenant_id', $tenant->id)
-            ->whereDoesntHave('laporanKeuangan')
             ->orderBy('tanggal_produksi', 'desc')
             ->get();
 
@@ -44,7 +43,6 @@ class laporanKeuanganController extends Controller
         }
 
         $produksiList = Produksi::where('tenant_id', $tenant->id)
-            ->whereDoesntHave('laporanKeuangan')
             ->orderBy('tanggal_produksi', 'desc')
             ->get();
 

@@ -69,7 +69,18 @@
                 class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
 
             <h2 class="text-xl font-semibold mb-4">Tambah User</h2>
-            <form>
+            <form method="POST" action="{{ route('auth.register.store') }}">
+                @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="mb-4">
                     <label class="block text-sm font-medium">Nama</label>
                     <input type="text" class="w-full mt-1 p-2 border rounded-md" name="name"
@@ -86,7 +97,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium">No HP</label>
-                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="no_hp" placeholder="08xxxxxxxxxx" />
+                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="no_hp" placeholder="Alamat Lengkap" />
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium">Alamat</label>
@@ -94,10 +105,11 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium">Role</label>
-                    <select name="role" class="w-full mt-1 p-2 border rounded-md">
+                    <select name="role" id="role" onchange="toggleTenantFields(this.value)" class="w-full mt-1 p-2 border rounded-md">
                         <option value="admin">Admin</option>
                         <option value="tenant">Tenant</option>
                     </select>
+        
                 </div>
                 <div class="flex justify-end gap-2">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-md">Batal</button>
@@ -107,6 +119,96 @@
         </div>
     </div>
 
+        <!-- Modal Edit User -->
+    @if (session('editUser'))
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50">
+
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+
+            <h2 class="text-xl font-semibold mb-4">Edit User</h2>
+
+            <form method="POST" action="{{ route('admin.datauser.update', session('editUser')->id) }}">
+                @csrf
+                
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium">Nama</label>
+                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="name"
+                        value="{{ session('editUser')->name }}" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium">Email</label>
+                    <input type="email" class="w-full mt-1 p-2 border rounded-md" name="email"
+                        value="{{ session('editUser')->email }}" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium">Password (Biarkan kosong jika tidak diubah)</label>
+                    <input type="password" class="w-full mt-1 p-2 border rounded-md" name="password" />
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium">Role</label>
+                    <select name="role" class="w-full mt-1 p-2 border rounded-md" onchange="toggleEditFields(this.value)">
+                        <option value="admin" {{ session('editUser')->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="tenant" {{ session('editUser')->role === 'tenant' ? 'selected' : '' }}>Tenant</option>
+                    </select>
+                </div>
+
+                <!-- Field tambahan hanya jika tenant -->
+                @if (session('editUser')->role === 'tenant' && session('editUser')->tenant)
+                <div class="mb-4 edit-only">
+                    <label class="block text-sm font-medium">No HP</label>
+                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="no_hp"
+                        value="{{ session('editUser')->tenant->no_hp }}" />
+                </div>
+                <div class="mb-4 edit-only">
+                    <label class="block text-sm font-medium">Alamat</label>
+                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="alamat"
+                        value="{{ session('editUser')->tenant->alamat }}" />
+                </div>
+                @endif
+
+                <div class="flex justify-end gap-2 mt-4">
+                    <a href="{{ route('admin.datauser.tampilkan') }}"
+                        class="px-4 py-2 bg-gray-300 rounded-md">Batal</a>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endif
+
+    <script>
+    function toggleEditFields(role) {
+        const editFields = document.querySelectorAll('.edit-only');
+        editFields.forEach(el => {
+            el.style.display = role === 'tenant' ? 'block' : 'none';
+        });
+    }
+    </script>
+
+
+    <script>
+    function toggleTenantFields(role) {
+        const alamatField = document.querySelector('input[name="alamat"]').closest('.mb-4');
+        const noHpField = document.querySelector('input[name="no_hp"]').closest('.mb-4');
+
+        if (role === 'tenant') {
+            alamatField.style.display = 'block';
+            noHpField.style.display = 'block';
+        } else {
+            alamatField.style.display = 'none';
+            noHpField.style.display = 'none';
+        }
+    }
+
+    // Panggil saat pertama kali
+    document.addEventListener('DOMContentLoaded', function () {
+        toggleTenantFields(document.getElementById('role').value);
+    });
+</script>
 
     <script>
         function openModal() {

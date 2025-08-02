@@ -62,7 +62,7 @@
                             </svg>
                         </button>
                         <div id="pengajuanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="{{ route('tenant.dataUsaha.create') }}"
+                            <a href="dataUsaha"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Buat Pengajuan</span>
                             </a>

@@ -10,6 +10,7 @@
     </div>
 
     <div class="bg-white rounded shadow p-4 ">
+
         <table class="w-full table-auto text-sm">
             <thead class="bg-gray-50 hidden md:table-header-group">
                 <tr
@@ -17,12 +18,19 @@
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keterangan
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Name
                     </th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Keterangan
+                    </th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah
+                    </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi
                     </th>
@@ -33,16 +41,18 @@
             <tbody>
                 <tr
                     class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No"><span
-                            class=" md:hidden font-semibold text-gray-600">No : </span>1.</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan"><span
-                                class=" md:hidden font-semibold text-gray-600">Keterangan : </span>Pemasukan</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal"><span
-                                class=" md:hidden font-semibold text-gray-600">Tanggal : </span>11- Mei - 2023</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah"><span
-                                class=" md:hidden font-semibold text-gray-600">Jumlah : </span>100.000</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi"><span
-                                class=" md:hidden font-semibold text-gray-600">Deskripsi : </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolorum libero, cupiditate reprehenderit numquam quia sunt vero nulla maiores! Saepe, dolorum eos consequatur ullam sunt fuga vel suscipit laboriosam praesentium.</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No">1</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Tenant">tenant</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan">Pemasukan</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal">11- Mei - 2023</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah">100.000</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi">Lorem ipsum dolor
+                        sit
+                        amet
+                        consectetur adipisicing elit. Nisi dolorum libero, cupiditate reprehenderit numquam quia
+                        sunt
+                        vero nulla maiores! Saepe, dolorum eos consequatur ullam sunt fuga vel suscipit laboriosam
+                        praesentium.</td>
 
                     <td class="py-2 px-3 text-center">
                         <div class="inline-flex gap-2">
@@ -59,7 +69,9 @@
                         </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
+
     </div>
 @endsection

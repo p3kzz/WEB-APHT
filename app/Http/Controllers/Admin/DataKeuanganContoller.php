@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\LaporanKeuangan;
 use Illuminate\Http\Request;
 
 class DataKeuanganContoller extends Controller
@@ -12,7 +13,8 @@ class DataKeuanganContoller extends Controller
      */
     public function index()
     {
-        return view('admin.datakeuangan');
+        $laporan = LaporanKeuangan::with('tenant.user')->get();
+        return view('admin.datakeuangan', compact('laporan'));
     }
 
     /**

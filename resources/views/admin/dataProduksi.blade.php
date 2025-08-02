@@ -1,4 +1,4 @@
-@extends('layouts.admin') {{-- Asumsi Anda memiliki layout bernama 'layouts.admin' --}}
+@extends('layouts.admin')
 @php use Illuminate\Support\Str; @endphp
 
 @section('content')
@@ -6,11 +6,11 @@
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Data Produksi Tenant</h2>
 
         <!-- Search Input -->
-        <div class="mb-6">
+        {{-- <div class="mb-6">
             <input type="text" id="searchInput" placeholder="Cari data produksi..."
                 class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onkeyup="filterTable()">
-        </div>
+        </div> --}}
 
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -87,23 +87,27 @@
                                         class="md:hidden font-semibold text-gray-600">Jumlah:
                                     </span>{{ number_format($data->jumlah, 0, ',', '.') }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan">
-                                    <span class="md:hidden font-semibold text-gray-600">Keterangan:
-                                    </span>{{ Str::limit($data->keterangan, 50, '...') }}
+                                    <span class="md:hidden font-semibold text-gray-600">Keterangan:</span>
+                                    @if ($data->keterangan)
+                                        {{ Str::limit($data->keterangan, 50, '...') }}
+                                    @else
+                                        <span class="text-gray-500">anda belum memberi keterangan</span>
+                                    @endif
                                 </td>
                                 <td class="py-2 px-3 text-center">
-                            <div class="inline-flex gap-2">
-                                <button type="button"
-                                    class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
-                                    onclick="alert('Aksi edit')">
-                                    Edit
-                                </button>
-                                <button type="button"
-                                    class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
-                                    onclick="confirm('Yakin ingin menghapus?')">
-                                    Hapus
-                                </button>
-                            </div>
-                        </td>
+                                    <div class="inline-flex gap-2">
+                                        <button type="button"
+                                            class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
+                                            onclick="alert('Aksi edit')">
+                                            Edit
+                                        </button>
+                                        <button type="button"
+                                            class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
+                                            onclick="confirm('Yakin ingin menghapus?')">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -145,4 +149,3 @@
         });
     </script>
 @endsection
-

@@ -64,11 +64,11 @@
                             </svg>
                         </button>
                         <div id="laporanDropdown" class="hidden pl-8 mt-1 space-y-2">
-                            <a href="{{ route('admin.dataproduksi.index') }}"
+                            <a href="dataproduksi"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Produksi</span>
                             </a>
-                            <a href="{{ route('admin.datakeuangan.index') }}"
+                            <a href="datakeuangan"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Keuangan</span>
                             </a>
@@ -131,8 +131,9 @@
             </header>
 
             <div class="flex flex-row flex-wrap items-center justify-between gap-4 mb-4 px-4">
-                <input type="text" placeholder="Search"
-                    class="flex-1 min-w-[150px]  p-2 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                <input type="text" placeholder="Search" id="searchInput"
+                    class="flex-1 min-w-[150px]  p-2 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    onkeyup="filterTable()" />
 
                 <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
                     <img src="{{ asset('assets/img/notification.png') }}" alt=""
@@ -178,6 +179,36 @@
             const overlay = document.getElementById('sidebar-overlay');
             sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
+        }
+
+        window.filterTable = function() {
+            const searchInput = document.getElementById('searchInput');
+            const filter = searchInput.value.toLowerCase();
+
+            const tables = document.querySelectorAll('main table:not(.hidden)');
+
+            tables.forEach(table => {
+                const tbody = table.querySelector('tbody');
+                if (!tbody) return;
+
+                const rows = tbody.getElementsByTagName('tr');
+
+                for (let i = 0; i < rows.length; i++) {
+                    let displayRow = false;
+                    const cells = rows[i].getElementsByTagName('td');
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            if (textValue.toLowerCase().includes(filter)) {
+                                displayRow = true;
+                                break;
+                            }
+                        }
+                    }
+                    rows[i].style.display = displayRow ? '' : 'none';
+                }
+            });
         }
 
         window.addEventListener('resize', () => {

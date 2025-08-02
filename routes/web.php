@@ -42,8 +42,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin.datauser.tampilkan');
     Route::resource('/register', RegisteredUserController::class)->names('auth.register');
     Route::post('/register/create', [RegisteredUserController::class, 'store'])->name('auth.register.store');
-    Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser']);
-    Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser']);
+   Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser'])->name('admin.datauser.edit');
+   Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser'])->name('admin.datauser.update');
     Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
 });
 

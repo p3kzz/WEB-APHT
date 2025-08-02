@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\TenantModel;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,54 +38,98 @@ class RegisteredUserController extends Controller
     {
     return $this->create();
     }
-    public function store(Request $request)
-{
-    $request->validate([
-         'name' => 'required',
-         'email' => 'required|email|unique:users,email',
-         'password' => 'required|min:5',
-         'role' => 'required|in:admin,tenant',
-      ]);
-      $data_user['name'] = $request->name;
-      $data_user['email'] = $request->email;
-      $data_user['password'] = Hash::make($request->password);
-    User::create($data_user);
-    $register = [
-         'email' => $request->email,
-         'password' => $request->password
-      ];
-    
-    return redirect()->route('admin.datauser.tampilkan')->with('success', 'User berhasil didaftarkan.');
+  public function store(Request $request) 
+{ 
+   
+    $rules = [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:5',
+        'role' => 'required|in:admin,tenant',
+    ];
+
+    if ($request->role === 'tenant') {
+        $rules['alamat'] = 'required';
+        $rules['no_hp'] = 'required';
     }
 
+    $request->validate($rules);
 
-   public function edit_DataUser($id) {
-   $users = User::findOrFail($id);
-   return view('admin.edit_dataUser', compact('users'));
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role' => $request->role,
+    ]);
+
+    if ($request->role === 'tenant') {
+        TenantModel::create([
+            'users_id' => $user->id,
+            'name' => $user->name,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'status' => 'aktif',
+        ]);
+    }
+
+    return redirect()->route('admin.datauser.tampilkan')->with('success', 'User berhasil didaftarkan.');
 }
 
-// Proses update data_user
-   public function update_DataUser(Request $request, $id) {
-      $request->validate([
-         'name' => 'required',
-         'email' => 'required|email|unique:users,email,' . $id,
-         'password' => 'nullable|min:5',
-         'role' => 'required|in:admin,tenant',
-      ]);
+   public function edit_DataUser($id)
+{
+    $users = User::findOrFail($id);
 
-      $Data_User = User::findOrFail($id);
-      $Data_User->name = $request->name;
-      $Data_User->email = $request->email;
-      $Data_User->role = $request->role;
+    // Simpan data user ke session agar bisa digunakan di view
+    session()->flash('editUser', $users);
 
-      if ($request->filled('password')) {
-         $Data_User->password = Hash::make($request->password);
-      }
+    // Redirect kembali ke halaman datauser
+    return redirect()->route('admin.datauser.tampilkan');
+}
 
-      $Data_User->save();
+   public function update_DataUser(Request $request, $id)
+{
+    $user = User::findOrFail($id);
 
-      return redirect('/datauser')->with('success', 'Data operator berhasil diperbarui');
+    $rules = [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'role' => 'required|in:admin,tenant',
+        // password tidak wajib diisi
+        'password' => 'nullable|min:5',
+    ];
+
+    if ($request->role === 'tenant') {
+        $rules['alamat'] = 'required';
+        $rules['no_hp'] = 'required';
+    }
+
+    $request->validate($rules);
+
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->role = $request->role;
+
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+
+    if ($user->role === 'tenant') {
+        $user->tenant()->updateOrCreate(
+            ['users_id' => $user->id],
+            [
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+                'status' => 'aktif'
+            ]
+        );
+    }
+
+    return redirect()->route('admin.datauser.tampilkan')->with('success', 'Data user berhasil diperbarui.');
    }
+
+
    public function hapus_DataUser($id){
       User::where('id', $id)->delete();
       return redirect('/datauser');

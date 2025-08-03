@@ -18,21 +18,21 @@
                     <th class="py-2 px-3">No</th>
                     <th class="py-2 px-3">Name</th>
                     <th class="py-2 px-3">Email</th>
-                    <th class="py-2 px-3">Role</th>
+                    <th class="py-2 px-3 text-center">Role</th>
                     <th class="py-2 px-3 text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $index => $user)
                     <tr
-                        class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No"><span
+                        class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none ">
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell " data-label="No"><span
                                 class=" md:hidden font-semibold text-gray-600">No : </span>{{ $index + 1 }}.</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Name"><span
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell " data-label="Name"><span
                                 class=" md:hidden font-semibold text-gray-600">Name : </span>{{ $user->name }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Email"><span
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell  " data-label="Email"><span
                                 class=" md:hidden font-semibold text-gray-600">Email : </span>{{ $user->email }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Role"><span
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell  " data-label="Role"><span
                                 class=" md:hidden font-semibold text-gray-600">Role : </span>
                             <span
                                 class="inline-block {{ $user->role == 'admin' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }} px-3 py-1 rounded-full font-semibold text-sm">
@@ -109,7 +109,7 @@
                         <option value="admin">Admin</option>
                         <option value="tenant">Tenant</option>
                     </select>
-        
+
                 </div>
                 <div class="flex justify-end gap-2">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-md">Batal</button>
@@ -131,7 +131,7 @@
 
             <form method="POST" action="{{ route('admin.datauser.update', session('editUser')->id) }}">
                 @csrf
-                
+
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium">Nama</label>

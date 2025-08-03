@@ -96,11 +96,7 @@
                                 </td>
                                 <td class="py-2 px-3 text-center">
                                     <div class="inline-flex gap-2">
-                                        <button type="button"
-                                            class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
-                                            onclick="alert('Aksi edit')">
-                                            Edit
-                                        </button>
+                                        <button onclick="openModal()" class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-800 transition">Edit</button>
                                         <button type="button"
                                             class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
                                             onclick="confirm('Yakin ingin menghapus?')">
@@ -115,6 +111,60 @@
             @endif
         </div>
     </div>
+
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+
+    <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+            bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+
+        <button onclick="closeModal()"
+            class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
+
+        <h2 class="text-xl font-semibold mb-4">Edit</h2>
+        <form method="POST" action="#">
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Nama Tenant</label>
+                <input type="text" class="w-full mt-1 p-2 border rounded-md" name="name"
+                    placeholder="Nama Tenant" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Biaya Produksi</label>
+                <input type="email" class="w-full mt-1 p-2 border rounded-md" name="biayaproduksi" placeholder="BiayaProduksi" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Tanggal Produksi</label>
+                <input type="password" class="w-full mt-1 p-2 border rounded-md" name="tanggalproduksi"
+                    placeholder="Tanggal Produksi" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Jumlah</label>
+                <input type="text" class="w-full mt-1 p-2 border rounded-md" name="jumlah"
+                    placeholder="Jumlah" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Keterangan</label>
+                <input type="text" class="w-full mt-1 p-2 border rounded-md" name="keetrangan"
+                    placeholder="Keeterangan" />
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-md">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Simpan</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+    function openModal() {
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+</script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

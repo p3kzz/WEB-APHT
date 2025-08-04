@@ -27,7 +27,7 @@ class dataLaporanController extends Controller
         }
         $laporanProduksi = Produksi::where('tenant_id', $tenant->id)->get();
         $laporanKeuangan = LaporanKeuangan::where('tenant_id', $tenant->id)
-            ->with('produksi') // Memuat relasi produksi
+            ->with('produksi')
             ->get();
 
         return view('tenan.dataLaporan', compact('laporanProduksi', 'laporanKeuangan'));

@@ -39,36 +39,40 @@
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No">1</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Tenant">tenant</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan">Pemasukan</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal">11- Mei - 2023</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah">100.000</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi">Lorem ipsum dolor
-                        sit
-                        amet
-                        consectetur adipisicing elit. Nisi dolorum libero, cupiditate reprehenderit numquam quia
-                        sunt
-                        vero nulla maiores! Saepe, dolorum eos consequatur ullam sunt fuga vel suscipit laboriosam
-                        praesentium.</td>
+                @foreach ($laporanKeuangan as $index => $data)
+                    <tr
+                        class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No">{{ $index + 1 }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Tenant">
+                            {{ $data->tenant->user->name ?? 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan">
+                            {{ $data->keterangan }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="tanggal_produksi">
+                            {{ $data->tanggal_produksi }}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah">
+                            Rp. {{ number_format($data->jumlah, 0, ',', '.') }}
+                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi">
+                            {{ $data->deskripsi }}</td>
 
-                    <td class="py-2 px-3 text-center">
-                        <div class="inline-flex gap-2">
-                            <button type="button"
-                                class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
-                                onclick="alert('Aksi edit')">
-                                Edit
-                            </button>
-                            <button type="button"
-                                class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
-                                onclick="confirm('Yakin ingin menghapus?')">
-                                Hapus
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                        <td class="py-2 px-3 text-center">
+                            <div class="inline-flex gap-2">
+                                <button type="button"
+                                    class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition"
+                                    onclick="alert('Aksi edit')">
+                                    Edit
+                                </button>
+                                <button type="button"
+                                    class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
+                                    onclick="confirm('Yakin ingin menghapus?')">
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
 
             </tbody>
         </table>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Tenant\laporanKeuanganController;
 use App\Models\LaporanKeuangan;
+use App\Models\Produksi;
 use Illuminate\Http\Request;
 
 class DatalaporanContoller extends Controller
@@ -14,7 +15,9 @@ class DatalaporanContoller extends Controller
      */
     public function index()
     {
-        return view('admin.dataLaporan');
+        $laporanProduksi = Produksi::with('tenant.user')->get();
+        $laporanKeuangan = LaporanKeuangan::with('tenant.user', 'produksi')->get();
+        return view('admin.dataLaporan', compact('laporanProduksi', 'laporanKeuangan'));
     }
 
     /**

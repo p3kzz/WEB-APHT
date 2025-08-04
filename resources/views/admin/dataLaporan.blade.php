@@ -15,124 +15,197 @@
         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors duration-200"
             onclick="showTab('keuangan')">Laporan Keuangan</button>
     </div>
-    <div class="bg-white rounded shadow p-4 ">
 
-        <table class="w-full table-auto text-sm">
-            <thead class="bg-gray-50 hidden md:table-header-group">
-                <tr
-                    class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Name
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Keterangan
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($laporanKeuangan as $index => $data)
-                    <tr
-                        class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No">{{ $index + 1 }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Tenant">
-                            {{ $data->tenant->user->name ?? 'N/A' }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Keterangan">
-                            {{ $data->keterangan }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="tanggal_produksi">
-                            {{ $data->tanggal_produksi }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah">
-                            Rp. {{ number_format($data->jumlah, 0, ',', '.') }}
-                        <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi">
-                            {{ $data->deskripsi }}</td>
-                    <td class="py-2 px-3 text-center">
-                        <div class="inline-flex gap-2">
-                            <button onclick="openModal()"
-                                class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-800 transition">Edit</button>
-                            <button type="button"
-                                class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
-                                onclick="confirm('Yakin ingin menghapus?')">
-                                Hapus
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
+    <div id="produksiTab" class="tab-content bg-white rounded-lg shadow-md p-4 overflow-x-auto">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Laporan Produksi</h3>
+        @if ($laporanProduksi->isEmpty())
+            <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative text-center">
+                <span class="block sm:inline">Belum ada data laporan produksi.</span>
+            </div>
+        @else
+            <table class="min-w-full divide-y divide-gray-200" id="produksiTable">
+                <thead class="bg-gray-50 hidden md:table-header-group">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                            Produk</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Biaya
+                            Produksi</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Tanggal Produksi</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($laporanProduksi as $index => $data)
+                        <tr
+                            class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No"><span
+                                    class="md:hidden font-semibold text-gray-600">No: </span>{{ $index + 1 }}.</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Produk">
+                                <span class="md:hidden font-semibold text-gray-600">Nama Produk:
+                                </span>{{ $data->nama_produk }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Biaya Produksi">
+                                <span class="md:hidden font-semibold text-gray-600">Biaya Produksi: </span>Rp.
+                                {{ number_format($data->biaya_produksi, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal Produksi">
+                                <span class="md:hidden font-semibold text-gray-600">Tanggal Produksi:
+                                </span>{{ \Carbon\Carbon::parse($data->tanggal_produksi)->format('d M Y') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah"><span
+                                    class="md:hidden font-semibold text-gray-600">Jumlah:
+                                </span>{{ number_format($data->jumlah, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
 
-            </tbody>
-        </table>
+    <div id="keuanganTab" class="tab-content bg-white rounded-lg shadow-md p-4 overflow-x-auto hidden">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Laporan Keuangan</h3>
+        @if ($laporanKeuangan->isEmpty())
+            <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative text-center">
+                <span class="block sm:inline">Belum ada data laporan keuangan.</span>
+            </div>
+        @else
+            <table class="min-w-full divide-y divide-gray-200" id="keuanganTable">
+                <thead class="bg-gray-50 hidden md:table-header-group">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Kategori</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Tanggal Produksi</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jumlah</th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Deskripsi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($laporanKeuangan as $index => $data)
+                        <tr
+                            class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No"><span
+                                    class="md:hidden font-semibold text-gray-600">No: </span>{{ $index + 1 }}.</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Nama Tenant">
+                                {{ $data->tenant->user->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Kategori">
+                                <span class="md:hidden font-semibold text-gray-600">Kategori: </span>
+                                @php
+                                    $kategoriClass = '';
+                                    switch ($data->keterangan) {
+                                        case 'Pemasukan':
+                                            $kategoriClass = 'bg-green-100 text-green-800';
+                                            break;
+                                        case 'pengeluaran':
+                                            $kategoriClass = 'bg-red-100 text-red-800';
+                                            break;
+                                        case 'labarugi':
+                                            $kategoriClass = 'bg-blue-100 text-blue-800';
+                                            break;
+                                        default:
+                                            $kategoriClass = 'bg-gray-100 text-gray-800';
+                                            break;
+                                    }
+                                @endphp
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $kategoriClass }}">
+                                    {{ ucfirst(str_replace('_', ' ', $data->keterangan)) }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal Produksi">
+                                <span class="md:hidden font-semibold text-gray-600">Tanggal Produksi: </span>
+                                {{ \Carbon\Carbon::parse($data->produksi->tanggal_produksi ?? $data->tanggal_produksi)->format('d M Y') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Jumlah"><span
+                                    class="md:hidden font-semibold text-gray-600">Jumlah: </span>Rp.
+                                {{ number_format($data->jumlah, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Deskripsi"><span
+                                    class="md:hidden font-semibold text-gray-600">Deskripsi:
+                                </span>{{ Str::limit($data->deskripsi, 50, '...') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
 
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <script>
+        // filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showTab = function(tabId) {
+                document.querySelectorAll('.tab-content').forEach(function(tabContent) {
+                    tabContent.classList.add('hidden');
+                });
 
-        <div
-            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-            bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                document.querySelectorAll('.flex-wrap button').forEach(function(button) {
+                    button.classList.remove('bg-blue-600', 'text-white');
+                    button.classList.add('bg-gray-200', 'text-gray-700');
+                });
 
-            <button onclick="closeModal()"
-                class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
-
-            <h2 class="text-xl font-semibold mb-4">Edit</h2>
-            <form method="POST" action="#">
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Nama Tenant</label>
-                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="name"
-                        placeholder="Nama Tenant" />
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Keterangan</label>
-                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="keetrangan"
-                        placeholder="Keeterangan" />
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Tanggal Produksi</label>
-                    <input type="password" class="w-full mt-1 p-2 border rounded-md" name="tanggalproduksi"
-                        placeholder="Password" />
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Jumlah</label>
-                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="jumlah" placeholder="Jumlah" />
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Deskripsi</label>
-                    <input type="text" class="w-full mt-1 p-2 border rounded-md" name="deskripsi"
-                        placeholder="Deskripsi" />
-                </div>
-                <div class="flex justify-end gap-2">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-md">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Simpan</button>
-                </div>
-            </form>
-        </div>
-        <script>
-            function openModal() {
-                document.getElementById('modal').classList.remove('hidden');
+                document.getElementById(tabId + 'Tab').classList.remove('hidden');
+                event.currentTarget.classList.remove('bg-gray-200', 'text-gray-700');
+                event.currentTarget.classList.add('bg-blue-600', 'text-white');
             }
+            window.filterTable = function() {
+                const searchInput = document.getElementById('searchInput');
+                const filter = searchInput.value.toLowerCase();
+                let activeTableId = '';
+                document.querySelectorAll('.tab-content').forEach(function(tabContent) {
+                    if (!tabContent.classList.contains('hidden')) {
+                        activeTableId = tabContent.id.replace('Tab', 'Table');
+                    }
+                });
 
-            function closeModal() {
-                document.getElementById('modal').classList.add('hidden');
+                if (!activeTableId) return;
+
+                const table = document.getElementById(activeTableId);
+                if (!table) return;
+
+                const tr = table.getElementsByTagName('tr');
+                const tbody = table.querySelector('tbody');
+                if (!tbody) return;
+
+                const rows = tbody.getElementsByTagName('tr');
+
+                for (let i = 0; i < rows.length; i++) {
+                    let displayRow = false;
+                    const cells = rows[i].getElementsByTagName('td');
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            if (textValue.toLowerCase().indexOf(filter) > -1) {
+                                displayRow = true;
+                                break;
+                            }
+                        }
+                    }
+                    rows[i].style.display = displayRow ? '' : 'none';
+                }
             }
-        </script>
-    @endsection
+            showTab('produksi');
+        });
+    </script>
+@endsection

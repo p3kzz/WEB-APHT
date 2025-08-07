@@ -55,7 +55,7 @@ class DataPengajuanTenantController extends Controller
         ];
 
         Pengajuan::where('id', $id)->update($pengajuan);
-        return redirect()->route('admin.PengajuanTenant.index')->with('success', 'Pengajuan berhasil dikirim!');
+        return redirect()->route('admin_apht.PengajuanTenant.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 
     /**

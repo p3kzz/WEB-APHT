@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataKeuanganContoller;
 use App\Http\Controllers\Admin\DatalaporanContoller;
 use App\Http\Controllers\Admin\DataMonitoringContoller;
+use App\Http\Controllers\Admin\DataMonitoringController;
 use App\Http\Controllers\Admin\DataPengajuanTenantController;
 use App\Http\Controllers\Admin\DataProduksiContoller;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -32,18 +33,18 @@ Route::middleware(['guest'])->group(function () {
 });
 
 // Admin
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('/admin', AdminController::class)->names('admin.index');
-    Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin.PengajuanTenant');
-    Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin.dataLaporan');
-    Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin.dataproduksi');
-    Route::resource('/datamonitoring', DataMonitoringContoller::class)->names('admin.datamonitoring');
-    Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin.datakeuangan');
-    Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin.datauser.tampilkan');
+Route::middleware(['auth', 'admin_apht'])->group(function () {
+    Route::resource('/admin', AdminController::class)->names('admin_apht.index');
+    Route::resource('/PengajuanTenant', DataPengajuanTenantController::class)->names('admin_apht.PengajuanTenant');
+    Route::resource('/dataLaporan', DatalaporanContoller::class)->names('admin_apht.dataLaporan');
+    Route::resource('/dataproduksi', DataProduksiContoller::class)->names('admin_apht.dataproduksi');
+    Route::resource('/datamonitoring', DataMonitoringController::class)->names('admin_apht.datamonitoring');
+    Route::resource('/datakeuangan', DataKeuanganContoller::class)->names('admin_apht.datakeuangan');
+    Route::get('/datauser', [RegisteredUserController::class, 'tampilkan'])->name('admin_apht.datauser.tampilkan');
     Route::resource('/register', RegisteredUserController::class)->names('auth.register');
     Route::post('/register/create', [RegisteredUserController::class, 'store'])->name('auth.register.store');
-   Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser'])->name('admin.datauser.edit');
-   Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser'])->name('admin.datauser.update');
+    Route::get('/edit/{id}/DataUser', [RegisteredUserController::class, 'edit_DataUser'])->name('admin_apht.datauser.edit');
+    Route::post('/edit/{id}/DataUser', [RegisteredUserController::class, 'update_DataUser'])->name('admin_apht.datauser.update');
     Route::get('/hapus/{id}/DataUser', [RegisteredUserController::class, 'hapus_DataUser']);
 });
 

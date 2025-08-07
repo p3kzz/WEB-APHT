@@ -29,11 +29,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
+        if ($user->role === 'admin_apht') {
             return redirect()->intended('/admin');
         } elseif ($user->role === 'tenant') {
             return redirect()->intended('/tenant');
-        } elseif ($user->role === 'admin-pds') {
+        } elseif ($user->role === 'admin_pds') {
             return redirect()->intended('/admin-pds');
         }
 

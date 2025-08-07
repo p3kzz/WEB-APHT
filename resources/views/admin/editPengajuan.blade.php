@@ -4,7 +4,7 @@
     <div class="bg-white rounded shadow p-4 overflow-x-auto">
         <h2 class="text-xl font-semibold mb-4">Ubah Status Pengajuan</h2>
 
-        <form action="{{ route('admin.PengajuanTenant.update', $pengajuan->id) }}" method="POST">
+        <form action="{{ route('admin_apht.PengajuanTenant.update', $pengajuan->id) }}" method="POST">
             @csrf
             @method('PUT')
 

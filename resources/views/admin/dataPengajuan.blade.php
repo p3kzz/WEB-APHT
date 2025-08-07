@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
-
     <div class="bg-white rounded shadow p-4 overflow-x-auto">
         <table class="w-full table-auto text-sm min-w-[600px]">
             <thead class="border-b bg-gray-50">
@@ -45,7 +43,7 @@
 
                         <td class="py-2 px-3 text-center">
                             <div class="inline-flex gap-2">
-                                <a href="{{ route('admin.PengajuanTenant.edit', $item->id) }}"
+                                <a href="{{ route('admin_apht.PengajuanTenant.edit', $item->id) }}"
                                     class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition">
                                     Edit
                                 </a>

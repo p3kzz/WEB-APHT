@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Tenant;
+
 use App\Models\Produksi;
 
 use App\Http\Controllers\Controller;

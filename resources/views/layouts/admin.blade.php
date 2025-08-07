@@ -33,14 +33,14 @@
 
                 <nav class="space-y-2 lg:space-y-4">
                     <a
-                        href="{{ route('admin.index.index') }}"class="flex items-center space-x-3 p-2 rounded-lg font-semibold transition-colors duration-200
-                    {{ request()->routeIs('admin.dataLaporan.index') ? 'bg-green-100 text-green-600' : 'text-gray-800 hover:bg-green-100 hover:text-green-600' }}">
+                        href="{{ route('admin_apht.index.index') }}"class="flex items-center space-x-3 p-2 rounded-lg font-semibold transition-colors duration-200
+                    {{ request()->routeIs('admin_apht.dataLaporan.index') ? 'bg-green-100 text-green-600' : 'text-gray-800 hover:bg-green-100 hover:text-green-600' }}">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/dashboard.png') }}" alt="Dashboard Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('admin.PengajuanTenant.index') }}"
+                    <a href="{{ route('admin_apht.PengajuanTenant.index') }}"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/upload-file.png') }}" alt="Dashboard Icon"
@@ -72,20 +72,20 @@
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Laporan Keuangan</span>
                             </a>
-                            <a href="{{ route('admin.dataLaporan.index') }}"
+                            <a href="{{ route('admin_apht.dataLaporan.index') }}"
                                 class="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-500 transition-colors duration-200">
                                 <span>Data Laporan</span>
                             </a>
                         </div>
                     </div>
-                    <a href="{{ route('admin.datamonitoring.index') }}"
+                    <a href="{{ route('admin_apht.datamonitoring.index') }}"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center"><img
                                 src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data Monitoring Icon"
                                 class="w-full h-full object-contain"></div>
                         <span>Data Monitoring</span>
                     </a>
-                    <a href="{{ route('admin.datauser.tampilkan') }}"
+                    <a href="{{ route('admin_apht.datauser.tampilkan') }}"
                         class="flex items-center space-x-3 p-2 rounded-lg text-gray-800 hover:bg-green-100 hover:text-green-600 font-semibold transition-colors duration-200">
                         <div class="w-5 h-5 flex items-center justify-center">
                             <img src="{{ asset('assets/img/monitoring-system.png') }}" alt="Data User Icon"

@@ -35,7 +35,7 @@
                         <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell  " data-label="Role"><span
                                 class=" md:hidden font-semibold text-gray-600">Role : </span>
                             <span
-                                class="inline-block {{ $user->role == 'admin' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }} px-3 py-1 rounded-full font-semibold text-sm">
+                                class="inline-block {{ $user->role == 'admin_apht' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }} px-3 py-1 rounded-full font-semibold text-sm">
                                 {{ ucfirst($user->role) }}
                             </span>
                         </td>
@@ -109,7 +109,7 @@
                     <label class="block text-sm font-medium">Role</label>
                     <select name="role" id="role" onchange="toggleTenantFields(this.value)"
                         class="w-full mt-1 p-2 border rounded-md">
-                        <option value="admin">Admin</option>
+                        <option value="admin_apht">admin_apht</option>
                         <option value="tenant">Tenant</option>
                     </select>
 
@@ -133,8 +133,8 @@
                 <h2 class="text-xl font-semibold mb-4">Edit User</h2>
 
 
-            <form method="POST" action="{{ route('admin.datauser.update', session('editUser')->id) }}">
-                @csrf
+                <form method="POST" action="{{ route('admin_apht.datauser.update', session('editUser')->id) }}">
+                    @csrf
                     <div class="mb-4">
                         <label class="block text-sm font-medium">Nama</label>
                         <input type="text" class="w-full mt-1 p-2 border rounded-md" name="name"
@@ -154,7 +154,8 @@
                         <label class="block text-sm font-medium">Role</label>
                         <select name="role" class="w-full mt-1 p-2 border rounded-md"
                             onchange="toggleEditFields(this.value)">
-                            <option value="admin" {{ session('editUser')->role === 'admin' ? 'selected' : '' }}>Admin
+                            <option value="admin_apht" {{ session('editUser')->role === 'admin_apht' ? 'selected' : '' }}>
+                                Admin
                             </option>
                             <option value="tenant" {{ session('editUser')->role === 'tenant' ? 'selected' : '' }}>Tenant
                             </option>
@@ -176,7 +177,7 @@
                     @endif
 
                     <div class="flex justify-end gap-2 mt-4">
-                        <a href="{{ route('admin.datauser.tampilkan') }}"
+                        <a href="{{ route('admin_apht.datauser.tampilkan') }}"
                             class="px-4 py-2 bg-gray-300 rounded-md">Batal</a>
                         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Update</button>
                     </div>

@@ -18,7 +18,10 @@ use App\Http\Controllers\Tenant\laporanProduksiController;
 use App\Http\Controllers\Tenant\laporanKeuanganController;
 use App\Http\Controllers\Tenant\monitoringController;
 use App\Http\Controllers\Tenant\TenantController;
+use App\Http\Controllers\PdSumekar\adminPdsController;
+use App\Http\Controllers\PdSumekar\pengajuanPDSController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AdminpdsMiddleware;
 use App\Http\Controllers\TenantControllers;
 
 
@@ -58,6 +61,10 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('/laporankeuangan', laporanKeuanganController::class)->names('tenant.laporankeuangan');
     Route::resource('/datalaporan', dataLaporanController::class)->names('tenan.datalaporan');
     Route::resource('/monitoring', monitoringController::class)->names('tenan.monitoring');
+});
+
+Route::middleware(['auth', AdminpdsMiddleware::class])->group(function () {
+    Route::resource('/adminpds', pengajuanPDSController::class)->names('pdSumekar.dataPengajuan');
 });
 
 

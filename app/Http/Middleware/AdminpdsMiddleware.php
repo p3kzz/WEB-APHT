@@ -16,7 +16,7 @@ class AdminpdsMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'admin_pds') {
+        if (Auth::check() && Auth::user()->role === 'admin-pds') {
             return $next($request);
         }
 

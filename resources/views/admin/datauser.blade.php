@@ -109,7 +109,8 @@
                     <label class="block text-sm font-medium">Role</label>
                     <select name="role" id="role" onchange="toggleTenantFields(this.value)"
                         class="w-full mt-1 p-2 border rounded-md">
-                        <option value="admin_apht">admin_apht</option>
+                        <option value="admin-pds">admin pds</option>
+                        <option value="admin">admin</option>
                         <option value="tenant">Tenant</option>
                     </select>
 

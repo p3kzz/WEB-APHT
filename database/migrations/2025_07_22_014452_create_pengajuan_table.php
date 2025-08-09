@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('unit_usaha');
             $table->string('file_pengajuan');
             $table->string('deskripsi');
-            $table->enum('status', ['pending', 'ditolak', 'disetujui'])->default('pending');
+            $table->enum('status', ['pending', 'ditolak', 'disetujui', 'review'])->default('pending');
             $table->string('komentar')->nullable();
             $table->timestamps();
         });

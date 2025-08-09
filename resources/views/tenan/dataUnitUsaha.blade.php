@@ -29,52 +29,6 @@
     </div>
 
 
-
-
-    {{-- <div class="bg-white rounded shadow p-4 overflow-x-auto">
-        <table class="w-full table-auto text-sm">
-            <thead class="border-b">
-                <tr class="text-left text-gray-600">
-                    <th class="py-2">No</th>
-                    <th class="py-2">Nama Tenan</th>
-                    <th class="py-2">Lokasi</th>
-                    <th class="py-2">Kontak</th>
-                    <th class="py-2">Status</th>
-                    <th class="py-2">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tenants as $index => $tenant)
-                    <tr class="border-t">
-                        <td class="py-2">{{ $index + 1 }}.</td>
-                        <td class="py-2">{{ $tenant->name }}</td>
-                        <td class="py-2">{{ $tenant->alamat }}</td>
-                        <td class="py-2">{{ $tenant->no_hp }}</td>
-                        <td class="py-2 text-green-600 font-semibold">{{ ucfirst($tenant->status) }}</td>
-                        <td class="py-2">
-                            <div class="flex items-center gap-2">
-                                <a href=""
-                                class="px-3 py-1 bg-green-500 text-white text-xs rounded-full"
-                                onclick="return confirm('Yakin ingin memverifikasi tenant ini?');">
-                                    Verification
-                                </a>
-
-                                <a href="/hapus/{{ $tenant->id }}/tenant"
-                                class="px-3 py-1 bg-red-500 text-white text-xs rounded-full"
-                                onclick="return confirm('Yakin ingin menghapus?')">
-                                    Hapus
-                                </a>
-                            </div>
-                        </td>
-
-                    </tr>
-                @endforeach
-            </tbody>
-
-        </table> --}}
-
-
-
     @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
             <strong class="font-bold">Sukses!</strong>
@@ -120,7 +74,7 @@
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                         </th>
-                        @if ($RejectPengajuan)
+                        @if ($pengajuan->contains('status', 'ditolak'))
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Komentar
@@ -130,11 +84,10 @@
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             File Pengajuan
                         </th>
-                        @if ($RejectPengajuan)
-                            <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Aksi</span>
-                            </th>
-                        @endif
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -168,6 +121,9 @@
                                         case 'disetujui':
                                             $statusClass = 'bg-green-100 text-green-800';
                                             break;
+                                        case 'direview':
+                                            $statusClass = 'bg-blue-100 text-blue-800';
+                                            break;
                                         case 'ditolak':
                                             $statusClass = 'bg-red-100 text-red-800';
                                             break;
@@ -181,7 +137,7 @@
                                     {{ ucfirst($data->status) }}
                                 </span>
                             </td>
-                            @if ($RejectPengajuan)
+                            @if ($pengajuan->contains('status', 'ditolak'))
                                 <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Komentar">
                                     <span class="md:hidden font-semibold text-gray-600">Komentar: </span>
                                     @if ($data->status == 'ditolak')
@@ -202,24 +158,33 @@
                                     -
                                 @endif
                             </td>
-                            @if ($RejectPengajuan)
-                                <td class="px-6 py-4 text-sm block md:table-cell text-right md:text-left" data-label="Aksi">
-                                    <span class="md:hidden font-semibold text-gray-600">Aksi: </span>
-                                    @if ($data->status == 'ditolak')
+                            <td class="px-6 py-4 text-sm block md:table-cell text-right md:text-left" data-label="Aksi">
+                                <span class="md:hidden font-semibold text-gray-600">Aksi: </span>
+                                <div class="flex space-x-2">
+                                    @if ($data->status === 'pending' || $data->status === 'ditolak')
                                         <a href="{{ route('tenant.dataPengajuan.edit', $data->id) }}"
                                             class="inline-flex items-center px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full hover:bg-blue-600 transition-colors duration-200">
-                                            Update Pengajuan
+                                            Edit
                                         </a>
+                                        <form action="{{ route('tenant.dataPengajuan.destroy', $data->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengajuan ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="inline-flex items-center px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full hover:bg-red-600 transition-colors duration-200">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     @else
-                                        -
+                                        <span>-</span>
                                     @endif
-                                </td>
-                            @endif
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         @endif
-
     </div>
 @endsection

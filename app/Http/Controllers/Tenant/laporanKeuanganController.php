@@ -24,6 +24,7 @@ class laporanKeuanganController extends Controller
         }
 
         $produksiList = Produksi::where('tenant_id', $tenant->id)
+            ->with('laporanKeuangan') // Eager load laporan keuangan
             ->orderBy('tanggal_produksi', 'desc')
             ->get();
 
@@ -42,6 +43,7 @@ class laporanKeuanganController extends Controller
             return back()->withErrors(['error' => 'Data tenant tidak ditemukan.']);
         }
 
+        // Mengambil semua produksi untuk tenant saat ini
         $produksiList = Produksi::where('tenant_id', $tenant->id)
             ->orderBy('tanggal_produksi', 'desc')
             ->get();
@@ -55,33 +57,37 @@ class laporanKeuanganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'produksi_id' => 'required|exists:produksi,id', // Validasi untuk memastikan produksi_id ada
             'keterangan' => 'required|in:Pemasukan,pengeluaran,labarugi',
-            'tanggal_produksi' => 'required|date',
             'jumlah' => 'required|integer|min:0',
             'deskripsi' => 'required|string|max:500',
         ]);
+
         $userId = Auth::id();
         $tenant = TenantModel::where('users_id', $userId)->first();
         if (!$tenant) {
             return back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini. Harap lengkapi profil tenant Anda terlebih dahulu.'])->withInput();
         }
-        $produksi = Produksi::where('tanggal_produksi', $request->tanggal_produksi)
+
+        // Temukan produksi berdasarkan ID yang dikirim dari form
+        $produksi = Produksi::where('id', $request->produksi_id)
             ->where('tenant_id', $tenant->id)
             ->first();
 
         if (!$produksi) {
-            return back()->withErrors(['error' => 'Tidak ada data produksi.'])->withInput();
+            return back()->withErrors(['error' => 'Produksi tidak ditemukan atau tidak valid.'])->withInput();
         }
 
         LaporanKeuangan::create([
             'tenant_id' => $tenant->id,
             'produksi_id' => $produksi->id,
             'keterangan' => $request->keterangan,
-            'tanggal_produksi' => $produksi->tanggal_produksi,
             'jumlah' => $request->jumlah,
             'deskripsi' => $request->deskripsi,
+            'tanggal_produksi' => $produksi->tanggal_produksi,
         ]);
-        return redirect()->route('tenant.laporankeuangan.index')->with('success', 'Pengajuan berhasil dikirim!');
+
+        return redirect()->route('tenant.laporankeuangan.index')->with('success', 'Laporan keuangan berhasil ditambahkan!');
     }
 
     /**

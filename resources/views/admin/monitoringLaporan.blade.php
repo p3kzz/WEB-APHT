@@ -78,7 +78,7 @@
 
                                 $jumlahPemasukan = $pemasukan?->jumlah ?? 0;
                                 $jumlahPengeluaran = $pengeluaran?->jumlah ?? 0;
-                                $jumlahLabaRugi = $jumlahPemasukan-$jumlahPengeluaran;
+                                $jumlahLabaRugi = $jumlahPemasukan - $jumlahPengeluaran;
                             @endphp
                             <tr
                                 class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">

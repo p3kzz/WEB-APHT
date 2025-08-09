@@ -99,7 +99,7 @@
                                     <div class="inline-flex gap-2">
                                         <a href="{{ route('admin_apht.datamonitoring.edit', $tenant->id) }}"
                                             class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition">
-                                            Edit
+                                            Lihat Laporan
                                         </a>
                                         <a onclick="return confirm('Yakin ingin menghapus?')" href=""
                                             class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition">Hapus</a>

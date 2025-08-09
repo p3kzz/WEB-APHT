@@ -27,5 +27,4 @@ class Produksi extends Model
     {
         return $this->hasMany(LaporanKeuangan::class, 'produksi_id');
     }
-
 }

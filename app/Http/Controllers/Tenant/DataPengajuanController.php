@@ -58,6 +58,15 @@ class DataPengajuanController extends Controller
     public function edit(string $id)
     {
         $pengajuan = Pengajuan::find($id);
+        if (!$pengajuan) {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak ditemukan.']);
+        }
+
+        // Memeriksa status pengajuan sebelum mengizinkan edit
+        if ($pengajuan->status === 'direview' || $pengajuan->status === 'disetujui') {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak dapat diubah karena sudah ' . $pengajuan->status]);
+        }
+
         return view('tenan.update-dataPengajuan', compact('pengajuan'));
     }
 
@@ -68,13 +77,17 @@ class DataPengajuanController extends Controller
     {
         $pengajuan = Pengajuan::find($id);
         if (!$pengajuan) {
-            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'pengajuan tidak ditemukan']);
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak ditemukan']);
         }
 
         $userId = Auth::id();
         $tenant = TenantModel::where('users_id', $userId)->first();
         if (!$tenant || $pengajuan->tenant_id !== $tenant->id) {
             return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Anda tidak memiliki izin untuk memperbarui pengajuan ini.']);
+        }
+
+        if ($pengajuan->status === 'direview' || $pengajuan->status === 'disetujui') {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak dapat diubah karena sudah ' . $pengajuan->status]);
         }
 
         $update = [
@@ -86,7 +99,6 @@ class DataPengajuanController extends Controller
 
         $validatedData = $request->validate($update);
 
-
         if ($request->hasFile('file_pengajuan')) {
             if ($pengajuan->file_pengajuan && Storage::disk('public')->exists($pengajuan->file_pengajuan)) {
                 Storage::disk('public')->delete($pengajuan->file_pengajuan);
@@ -97,6 +109,7 @@ class DataPengajuanController extends Controller
             $filePath = $file->storeAs('pengajuan', $fileName, 'public');
             $validatedData['file_pengajuan'] = $filePath;
         }
+
         if ($pengajuan->status === 'ditolak') {
             $validatedData['status'] = 'pending';
             $validatedData['komentar'] = null;
@@ -110,6 +123,26 @@ class DataPengajuanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pengajuan = Pengajuan::find($id);
+        if (!$pengajuan) {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak ditemukan.']);
+        }
+
+        $userId = Auth::id();
+        $tenant = TenantModel::where('users_id', $userId)->first();
+        if (!$tenant || $pengajuan->tenant_id !== $tenant->id) {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Anda tidak memiliki izin untuk menghapus pengajuan ini.']);
+        }
+
+        if ($pengajuan->status === 'direview' || $pengajuan->status === 'disetujui') {
+            return redirect()->route('tenant.dataPengajuan.index')->withErrors(['error' => 'Pengajuan tidak dapat dihapus karena sudah ' . $pengajuan->status]);
+        }
+
+        if ($pengajuan->file_pengajuan && Storage::disk('public')->exists($pengajuan->file_pengajuan)) {
+            Storage::disk('public')->delete($pengajuan->file_pengajuan);
+        }
+
+        $pengajuan->delete();
+        return redirect()->route('tenant.dataPengajuan.index')->with('success', 'Pengajuan berhasil dihapus!');
     }
 }

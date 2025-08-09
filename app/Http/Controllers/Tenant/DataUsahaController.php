@@ -39,7 +39,7 @@ class DataUsahaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal_pengajuan' => 'required|date',
+            'tanggal_pengajuan' => 'required|date||after_or_equal:today',
             'unit_usaha' => 'required|string',
             'file_pengajuan' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'deskripsi' => 'required|string',

@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:5',
-            'role' => 'required|in:admin,tenant',
+            'role' => 'required|in:admin,tenant,admin-pds',
         ];
 
         if ($request->role === 'tenant') {
@@ -93,7 +93,7 @@ class RegisteredUserController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required|in:admin,tenant',
+            'role' => 'required|in:admin,tenant', 'admin-pds',
             // password tidak wajib diisi
             'password' => 'nullable|min:5',
         ];

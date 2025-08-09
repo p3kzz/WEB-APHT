@@ -26,5 +26,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('tenant123'),
             'role' => 'tenant',
         ]);
+
     }
 }

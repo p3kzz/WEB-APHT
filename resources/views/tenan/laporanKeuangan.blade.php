@@ -24,76 +24,50 @@
                 </div>
             @endif
 
-            <form action="{{ route('tenant.laporankeuangan.store') }}" method="POST" class="space-y-4">
+            <form action="{{ route('tenant.laporankeuangan.store') }}" method="POST">
                 @csrf
 
-                <div>
-                    <label for="keterangan" class="block text-sm font-medium text-gray-700 mb-1">Kategori Laporan</label>
+                <div class="mb-4">
+                    <label for="produksi_id" class="block text-gray-700 text-sm font-bold mb-2">Pilih Produksi</label>
+                    <select name="produksi_id" id="produksi_id"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        @foreach ($produksiList as $produksi)
+                            <option value="{{ $produksi->id }}">
+                                Produksi: {{ $produksi->nama_produk }} - Tanggal:
+                                {{ \Carbon\Carbon::parse($produksi->tanggal_produksi)->format('d M Y') }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="keterangan" class="block text-gray-700 text-sm font-bold mb-2">Keterangan</label>
                     <select name="keterangan" id="keterangan"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                        required>
-                        <option value="">Pilih Kategori</option>
-                        <option value="Pemasukan" {{ old('keterangan') == 'Pemasukan' ? 'selected' : '' }}>Pemasukan
-                        </option>
-                        <option value="pengeluaran" {{ old('keterangan') == 'pengeluaran' ? 'selected' : '' }}>Pengeluaran
-                        </option>
-                        <option value="labarugi" {{ old('keterangan') == 'labarugi' ? 'selected' : '' }}>Laba/Rugi</option>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="Pemasukan">Pemasukan</option>
+                        <option value="pengeluaran">Pengeluaran</option>
+                        {{-- Laba/Rugi tidak perlu diinput, karena dihitung --}}
                     </select>
-                    @error('keterangan')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
                 </div>
 
-                <div>
-                    <label for="tanggal_produksi" class="block text-sm font-medium text-gray-700 mb-1">Pilih Tanggal
-                        Produksi</label>
-                    <select name="tanggal_produksi" id="tanggal_produksi"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                        required {{ $produksiList->isEmpty() ? 'disabled' : '' }}>
-                        @if ($produksiList->isEmpty())
-                            <option value="">tidak ada laporan produksi tersedia</option>
-                        @else
-                            <option value="">Pilih Tanggal Produksi</option>
-                            @foreach ($produksiList as $produksi)
-                                <option value="{{ $produksi->tanggal_produksi }}"
-                                    {{ old('tanggal_produksi') == $produksi->tanggal_produksi ? 'selected' : '' }}>
-                                    {{ \Carbon\Carbon::parse($produksi->tanggal_produksi)->format('d M Y') }}
-                                </option>
-                            @endforeach
-                        @endif
-                    </select>
-
-                    @error('tanggal_produksi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="jumlah" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
+                <div class="mb-4">
+                    <label for="jumlah" class="block text-gray-700 text-sm font-bold mb-2">Jumlah (Rp)</label>
                     <input type="number" name="jumlah" id="jumlah"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                        value="{{ old('jumlah') }}" required min="0">
-                    @error('jumlah')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        required>
                 </div>
 
-                <div>
-                    <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+                <div class="mb-4">
+                    <label for="deskripsi" class="block text-gray-700 text-sm font-bold mb-2">Deskripsi</label>
                     <textarea name="deskripsi" id="deskripsi" rows="3"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                        required>{{ old('deskripsi') }}</textarea>
-                    @error('deskripsi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        required></textarea>
                 </div>
 
-                <div class="pt-4 flex justify-end">
-                    <button type="submit"
-                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
-                        Simpan Laporan
-                    </button>
-                </div>
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Simpan Laporan
+                </button>
             </form>
         </div>
     </div>

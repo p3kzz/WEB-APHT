@@ -13,7 +13,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::all();
+        $pengajuan = Pengajuan::paginate(10); 
         return view('admin.dataPengajuan', compact('pengajuan'));
     }
 

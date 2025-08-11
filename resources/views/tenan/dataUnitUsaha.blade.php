@@ -74,7 +74,7 @@
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                         </th>
-                        @if ($pengajuan->contains('status', 'ditolak'))
+                        @if ($RejectPengajuan) {{-- Changed from $pengajuan->contains('status', 'ditolak') to $RejectPengajuan --}}
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Komentar
@@ -96,7 +96,7 @@
                             class="block md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none rounded-lg shadow-sm md:shadow-none">
                             <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="No">
                                 <span class="md:hidden font-semibold text-gray-600">No: </span>
-                                {{ $index + 1 }}.
+                                {{ ($pengajuan->currentPage() - 1) * $pengajuan->perPage() + $loop->iteration }}.
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Tanggal Pengajuan">
                                 <span class="md:hidden font-semibold text-gray-600">Tanggal Pengajuan: </span>
@@ -137,7 +137,7 @@
                                     {{ ucfirst($data->status) }}
                                 </span>
                             </td>
-                            @if ($pengajuan->contains('status', 'ditolak'))
+                            @if ($RejectPengajuan) {{-- Changed from $pengajuan->contains('status', 'ditolak') to $RejectPengajuan --}}
                                 <td class="px-6 py-4 text-sm text-gray-900 block md:table-cell" data-label="Komentar">
                                     <span class="md:hidden font-semibold text-gray-600">Komentar: </span>
                                     @if ($data->status == 'ditolak')
@@ -185,6 +185,11 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{-- Tambahkan link pagination di sini --}}
+            <div class="mt-4">
+                {{ $pengajuan->links() }}
+            </div>
         @endif
     </div>
 @endsection

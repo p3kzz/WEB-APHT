@@ -27,5 +27,12 @@ class UserSeeder extends Seeder
             'role' => 'tenant',
         ]);
 
+        User::create([
+            'name' => 'pds',
+            'email' => 'pds@gmail.com',
+            'password' => Hash::make('pds123'),
+            'role' => 'admin-pds',
+        ]);
+
     }
 }

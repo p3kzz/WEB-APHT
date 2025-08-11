@@ -18,7 +18,8 @@
             <tbody>
                 @foreach ($pengajuan as $index => $item)
                     <tr class="border-t hover:bg-gray-50">
-                        <td class="py-2 px-3">{{ $index + 1 }}</td>
+                        {{-- Logika penomoran yang benar untuk pagination --}}
+                        <td class="py-2 px-3">{{ ($pengajuan->currentPage() - 1) * $pengajuan->perPage() + $loop->iteration }}</td>
                         <td class="py-2 px-3">{{ $item->tanggal_pengajuan }}</td>
                         <td class="py-2 px-3">{{ $item->unit_usaha }}</td>
                         <td class="py-2 px-3"><a href="{{ Storage::url($item->file_pengajuan) }}" target="_blank"
@@ -53,5 +54,10 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{-- Menampilkan tautan pagination di sini --}}
+        <div class="mt-4">
+            {{ $pengajuan->links() }}
+        </div>
     </div>
 @endsection

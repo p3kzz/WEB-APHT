@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pengajuan;
+use App\Notifications\PengajuanStatusNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 
 class DataPengajuanTenantController extends Controller
 {
@@ -13,7 +16,7 @@ class DataPengajuanTenantController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::paginate(10); 
+        $pengajuan = Pengajuan::paginate(10);
         return view('admin.dataPengajuan', compact('pengajuan'));
     }
 
@@ -49,12 +52,26 @@ class DataPengajuanTenantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pengajuan = [
-            'status' => $request->status,
-            'komentar' => $request->komentar,
-        ];
+        $pengajuan = Pengajuan::findOrFail($id);
+        $request->validate([
+            'status' => 'required|in:direview,disetujui,ditolak',
+            'komentar' => 'nullable|string'
+        ]);
 
-        Pengajuan::where('id', $id)->update($pengajuan);
+        $oldStatus = $pengajuan->status;
+        $pengajuan->status = $request->status;
+        $pengajuan->komentar = $request->komentar;
+        $pengajuan->save();
+
+        $tenantUser = $pengajuan->tenant->user;
+
+        if ($tenantUser && $oldStatus !== $pengajuan->status) {
+            try {
+                Notification::send($tenantUser, new PengajuanStatusNotification($pengajuan));
+            } catch (\Exception $e) {
+                Log::error('Gagal mengirim notifikasi email untuk Pengajuan ' . $pengajuan->id . ': ' . $e->getMessage());
+            }
+        }
         return redirect()->route('admin_apht.PengajuanTenant.index')->with('success', 'Pengajuan berhasil dikirim!');
     }
 

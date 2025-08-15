@@ -16,18 +16,23 @@ class DataPengajuanController extends Controller
      */
     public function index()
     {
-    $userId = Auth::id();
-    $tenant = TenantModel::where('users_id', $userId)->first();
+        $userId = Auth::id();
+        $tenant = TenantModel::where('users_id', $userId)->first();
+        $pengajuan = collect();
+        $unreadNotifications = collect();
 
-    if (!$tenant) {
-        return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
-    }
+        if ($tenant) {
+            $pengajuan = Pengajuan::where('tenant_id', $tenant->id)->paginate(10);
+            $user = Auth::user();
+            $unreadNotifications = $user->unreadNotifications;
+        } else {
+            return redirect()->back()->withErrors(['error' => 'Data tenant tidak ditemukan untuk pengguna ini.']);
+        }
 
-    // Gunakan paginate, misal 10 data per halaman
-    $pengajuan = Pengajuan::where('tenant_id', $tenant->id)
-        ->paginate(10);
+        $pengajuan = Pengajuan::where('tenant_id', $tenant->id)
+            ->paginate(10);
 
-    return view('tenan.dataUnitUsaha', compact('pengajuan'));
+        return view('tenan.dataUnitUsaha', compact('pengajuan', 'unreadNotifications'));
     }
 
 
